@@ -105,7 +105,7 @@ Redirect every old URL (`/current-auctions/`, `/past-auctions/`, `/sold-properti
 
 - [x] **Official address (decided):** 100 SW Albany Ave, Suite 300, Stuart, FL 34994 (Chapman Commercial Real Estate office). See §6a.
 - [x] **Official phone (decided):** (772) 732-0289.
-- [ ] Official email. Confirm the email domain (`AssociateAuction.com` vs `AssociateAuctions.com`).
+- [x] **Official email (decided):** kc@associateauctions.com. Fix AuctionZip, which shows `KC@AssociateAuction.com` (no "s").
 - [x] Broker license verified on DBPR. See §6a.
 - [ ] Auction business license status (see §6a).
 - [ ] Logo source files (SVG) and any brand colors.
@@ -128,6 +128,7 @@ KC Daniel, Auctioneer & Broker Associate
 100 SW Albany Ave, Suite 300
 Stuart, FL 34994
 Phone: (772) 732-0289
+Email: kc@associateauctions.com
 Florida Auctioneer AU3602 · Florida Real Estate Broker BK3435557
 ```
 
