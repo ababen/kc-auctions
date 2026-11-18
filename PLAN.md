@@ -43,7 +43,7 @@ Third line of business: **Benefit/charity auctions** (galas, fundraisers). It ge
 ```
 /                               Home (seller + buyer split, next auction, results, KC, testimonials)
 /auctions/                      Current & upcoming (filters: county, type, date, online/live)
-/auctions/[slug]/               Property detail (gallery, countdown, terms, docs, map, register)
+/auctions/[slug]/               Auction detail for any category: gallery, countdown, bid box, details, lots (multi-lot), terms, docs, dates, map
 /sold/                          Results gallery (price, date, days to sale, before/after story)
 /sell/                          Why auction? Process, timeline (30-day marketing + 30-day close), fees FAQ
 /sell/estates-and-trusts/       For executors, trustees, attorneys (KC's J.D. angle)
@@ -67,8 +67,8 @@ Redirect every old URL (`/current-auctions/`, `/past-auctions/`, `/sold-properti
 
 ## 4. Key features
 
-1. **Auction listings engine.** Each auction is a content entry with:
-   - address, county, type (absolute / reserve / online)
+1. **Auction listings engine.** Not every auction is real estate, so each auction has a **category** (real estate / estate & personal property / vehicles & equipment / benefit-charity) that decides which detail fields, terms and documents its page shows. Single-item auctions (a house, a vehicle) show one item. Multi-lot auctions (estate contents, galas) also list **lots**, each with lot #, title, photos, opening bid and close time. Each auction entry holds:
+   - category, location, county, format (absolute / reserve / online-only timed / live + online)
    - dates (preview, auction, closing)
    - status (`upcoming` → `live` → `sold` / `passed`)
    - photos, video, documents (bidder packet, disclosures)
