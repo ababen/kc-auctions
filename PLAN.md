@@ -103,8 +103,10 @@ Redirect every old URL (`/current-auctions/`, `/past-auctions/`, `/sold-properti
 
 ## 6. Content we need from KC
 
-- [ ] **One** official address, phone, and email. The audit found 3 versions. Also confirm the email domain (`AssociateAuction.com` vs `AssociateAuctions.com`).
-- [ ] Confirm the broker license number: the site shows both **BK2070353** and **BK3070353**.
+- [x] **Official address (decided):** 100 SW Albany Ave, Suite 300, Stuart, FL 34994 (Chapman Commercial Real Estate office). See §6a.
+- [ ] Official phone and email. Confirm the email domain (`AssociateAuction.com` vs `AssociateAuctions.com`).
+- [x] Broker license verified on DBPR. See §6a.
+- [ ] Auction business license status (see §6a).
 - [ ] Logo source files (SVG) and any brand colors.
 - [ ] Sales history: 10+ past sales with address, date, price, photos, days to close.
 - [ ] 5+ testimonials (with photo and permission).
@@ -115,11 +117,44 @@ Redirect every old URL (`/current-auctions/`, `/past-auctions/`, `/sold-properti
 
 ---
 
+## 6a. Official business details (use everywhere)
+
+The site, AuctionZip, Google Business Profile, Instagram/Facebook, LinkedIn, EstateSale.com, Yelp and every directory listing must show exactly the same details.
+
+```
+Associate Auctions
+KC Daniel, Auctioneer & Broker Associate
+100 SW Albany Ave, Suite 300
+Stuart, FL 34994
+Phone: TBD (Chapman office main line is 772-631-9168)
+Florida Auctioneer AU3602 · Florida Real Estate Broker BK3435557
+```
+
+**DBPR license check** (myfloridalicense.com, data as of Nov 18, 2026):
+
+| License | Holder | Type | Status | Expires |
+|---|---|---|---|---|
+| **AU3602** | Daniel, Karlin C | Auctioneer | Current, Active ✅ | 2027-11-30 |
+| **BK3435557** | Daniel, Karlin C | Real Estate Broker (rank: Broker Sales) | Current, Active ✅ | 2027-03-31 |
+| BK3070353 | Daniel, Karlin C | Real Estate Broker | **License Authority Voided** ❌ | 2019-03-31 |
+| BK2070353 | — | — | **Does not exist** ❌ | — |
+| AB3046 | Associate Auctions, LLC | Auction Business | **Null and Void** ❌ | 2017-11-30 |
+| CQ1038128 | Associate Auctions LLC | Real Estate Corporation | **License Authority Voided** ❌ | 2020-03-31 |
+
+**Fixes:**
+- Replace `AU3602 & BK3070353` (site footer) and `BK2070353` (About page) with **AU3602 & BK3435557**.
+- DBPR still lists the old addresses (PO Box 123 Stuart; 608 Colorado Ave). KC should update his DBPR address of record to match.
+- **Ask KC to confirm with DBPR or his attorney before launch (we don't give legal advice):**
+  - **Auction business license:** Associate Auctions' auction business license (AB3046) is void. Can it advertise and run auctions under that name without a current one?
+  - **Brokerage name in ads:** BK3435557 is a broker-associate ("Broker Sales") license under Chapman Commercial Real Estate. Do real estate ads on the site need to name Chapman as the brokerage?
+
+---
+
 ## 7. Phases & timeline (~6 weeks)
 
 | Week | Phase | Deliverables |
 |---|---|---|
-| 1 | **Discovery & fixes now** | Collect content (§6). Unify contact details everywhere. Claim the Google Business Profile. Hotfix the 404 menu links on the current site. |
+| 1 | **Discovery & fixes now** | Collect content (§6). Update every listing to the §6a details. Fix the license numbers on the current site. Confirm the licensing questions in §6a. Claim the Google Business Profile. Hotfix the 404 menu links on the current site. |
 | 2 | **Design** | Moodboard, design tokens, homepage + auction detail + sold page mockups (desktop and mobile). Client review. |
 | 3–4 | **Build** | Astro scaffold, components, auction content model, CMS, forms, all pages, redirects, structured data. |
 | 5 | **Content & QA** | Load real auctions and results, write local/FAQ copy, accessibility and Lighthouse pass (target 95+), cross-browser checks. |
