@@ -1,0 +1,42 @@
+---
+import { site } from '../data/site';
+const interests = ['Real estate auctions', 'Selling a property', 'Estates & trusts', 'Benefit / charity'];
+---
+<section id="analysis" class="section--tight">
+  <div class="container">
+    <div class="lead-box dark">
+      <div>
+        <h2 class="h2" style="font-size: clamp(30px, 3.6vw, 46px);">Is your property a good fit for auction?</h2>
+        <p class="lead">Tell us about it and KC will get back to you with a free, no-obligation auction analysis.</p>
+        <div style="display: flex; flex-direction: column; gap: 6px; padding-top: 12px;">
+          <a href={site.phoneHref} style="font-weight: 700; font-size: 22px; text-decoration: none; color: var(--paper);">{site.phone}</a>
+          <a href={`mailto:${site.email}`} style="color: var(--gold);">{site.email}</a>
+        </div>
+      </div>
+      <div class="form-side">
+        <form name="auction-analysis" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="company" class="stack" style="gap: 16px;">
+          <input type="hidden" name="form-name" value="auction-analysis" />
+          <p class="hidden"><label>Leave this empty <input name="company" /></label></p>
+          <div class="form-row">
+            <label class="field">Name <input type="text" name="name" autocomplete="name" required /></label>
+            <label class="field">Phone <input type="tel" name="phone" autocomplete="tel" /></label>
+          </div>
+          <label class="field">Email <input type="email" name="email" autocomplete="email" required /></label>
+          <label class="field">Property address or what you're selling
+            <input type="text" name="property" autocomplete="street-address" />
+          </label>
+          <fieldset>
+            <legend>I'm interested in</legend>
+            <div class="chips">
+              {interests.map((i, n) => (
+                <label class="chip"><input type="checkbox" name="interests" value={i} checked={n === 0} /><span>{i}</span></label>
+              ))}
+            </div>
+          </fieldset>
+          <label class="field">Anything else? <textarea name="message" rows="3"></textarea></label>
+          <button class="btn btn--gold btn--lg btn--block" type="submit">Send my request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

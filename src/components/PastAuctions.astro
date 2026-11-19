@@ -1,0 +1,40 @@
+---
+import AuctionCard from './AuctionCard.astro';
+import Icon from './Icon.astro';
+import { pastAuctions, otherPastAuctions } from '../data/auctions';
+
+interface Props { heading?: 'h1' | 'h2' }
+const { heading = 'h2' } = Astro.props;
+const H = heading;
+---
+<section id="past" class="dark section">
+  <div class="container">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 48px;">
+      <div>
+        <div class="eyebrow">The record</div>
+        <H class="h2">Going, going… gone.</H>
+        <p class="lead" style="margin-top: 12px; max-width: 520px; font-size: 16px;">Land, homes, commercial sites, vehicles and whole estates. A few of the auctions KC has called on the Treasure Coast.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong>20+</strong><span>years in the auction business</span></div>
+        <div class="stat"><strong>2nd</strong><span>generation auctioneer</span></div>
+        <div class="stat"><strong>2010</strong><span>Florida bid-calling champion</span></div>
+      </div>
+    </div>
+    <div class="grid-cards">
+      {pastAuctions.map((a, i) => <AuctionCard auction={a} delay={i * 0.12} />)}
+    </div>
+    <ul class="mini-list">
+      {otherPastAuctions.map((m) => (
+        <li class="mini">
+          <span class="icon"><Icon name={m.icon} size={26} /></span>
+          <span>
+            <span class="cat">{m.category}</span>
+            <span class="title">{m.title}</span>
+            <span class="place">{m.place}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

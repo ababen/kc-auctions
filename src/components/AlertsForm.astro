@@ -1,0 +1,11 @@
+---
+/* Netlify Forms: the hidden `form-name` + data-netlify attribute register this form at deploy time. */
+---
+<form name="auction-alerts" method="POST" action="/thanks/?form=alerts" data-netlify="true" netlify-honeypot="company" class="form-row" style="align-items: flex-end;">
+  <input type="hidden" name="form-name" value="auction-alerts" />
+  <p class="hidden"><label>Leave this empty <input name="company" /></label></p>
+  <label class="field" style="flex: 1 1 260px;">Email or mobile number
+    <input type="text" name="contact" autocomplete="email" required />
+  </label>
+  <button class="btn btn--ink btn--lg" type="submit" style="flex: 0 0 auto;">Notify me</button>
+</form>

@@ -1,0 +1,20 @@
+---
+import { Image } from 'astro:assets';
+import type { Auction } from '../data/auctions';
+
+interface Props { auction: Auction; delay?: number }
+const { auction, delay = 0 } = Astro.props;
+const photo = auction.photos[0];
+---
+<a class="auction-card" href={`/auctions/${auction.slug}/`}>
+  <div class="photo">
+    <Image src={photo.src} alt={photo.alt} widths={[400, 640, 900]} sizes="(max-width: 700px) 100vw, 400px" />
+    {auction.status === 'completed' && <span class="stamp" style={`animation-delay:${delay}s`}>AUCTIONED</span>}
+  </div>
+  <div class="body">
+    <span class="cat">{auction.category}</span>
+    <span class="title">{auction.shortTitle}</span>
+    <span class="line">{auction.cardLine}</span>
+    <span class="more">View auction details →</span>
+  </div>
+</a>
