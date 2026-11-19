@@ -4,174 +4,239 @@
   "trailingSlash": true,
   "redirects": [
     {
-      "source": "/current-auctions",
+      "source": "/auctions/residential-real-estate-auction/(.*)",
+      "destination": "/auctions/2392-se-fruit-ave/",
+      "statusCode": 301
+    },
+    {
+      "source": "/auctions/56-9-acres-development-property/(.*)",
+      "destination": "/auctions/angle-road-development-property/",
+      "statusCode": 301
+    },
+    {
+      "source": "/auctions/commercial-real-estate-auction/(.*)",
+      "destination": "/auctions/st-lucie-west-commercial-lots/",
+      "statusCode": 301
+    },
+    {
+      "source": "/auctions/6019-s-us-highway-1-2/(.*)",
+      "destination": "/auctions/6019-s-us-highway-1/",
+      "statusCode": 301
+    },
+    {
+      "source": "/4-5-acres-auctioned-at-real-estate-auction-in-fort-pierce-florida/",
+      "destination": "/auctions/6019-s-us-highway-1/",
+      "statusCode": 301
+    },
+    {
+      "source": "/auctions/(auction-2-homes-in-lakefront-private-community-in-port-st-lucie|auction-home-in-lakefront-private-community-in-port-st-lucie|real-estate-auction-2-1-riverside-condo-at-monterey-yacht-country-club|6019-s-us-highway-1)/(.+)",
+      "destination": "/auctions/$1/",
+      "statusCode": 301
+    },
+    {
+      "source": "/auctions/new-property/(.*)",
       "destination": "/auctions/",
-      "permanent": true
+      "statusCode": 301
+    },
+    {
+      "source": "/auctions/new-property-2/(.*)",
+      "destination": "/auctions/",
+      "statusCode": 301
+    },
+    {
+      "source": "/new-property/",
+      "destination": "/auctions/",
+      "statusCode": 301
+    },
+    {
+      "source": "/auctions/(category|tag|list|month|today|week|day|photo|map|page)/(.*)",
+      "destination": "/auctions/",
+      "statusCode": 301
+    },
+    {
+      "source": "/auctions/(\\d{4}-\\d{2}-\\d{2}|\\d{4}-\\d{2})/(.*)",
+      "destination": "/auctions/",
+      "statusCode": 301
     },
     {
       "source": "/current-auctions/",
       "destination": "/auctions/",
-      "permanent": true
+      "statusCode": 301
     },
     {
-      "source": "/past-auctions",
+      "source": "/upcoming-auctions/(.*)",
       "destination": "/auctions/",
-      "permanent": true
+      "statusCode": 301
+    },
+    {
+      "source": "/associateauctions/(.*)",
+      "destination": "/auctions/",
+      "statusCode": 301
     },
     {
       "source": "/past-auctions/",
       "destination": "/auctions/",
-      "permanent": true
-    },
-    {
-      "source": "/sold-properties",
-      "destination": "/auctions/",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/sold-properties/",
       "destination": "/auctions/",
-      "permanent": true
-    },
-    {
-      "source": "/updates",
-      "destination": "/auctions/",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/updates/",
       "destination": "/auctions/",
-      "permanent": true
+      "statusCode": 301
     },
     {
-      "source": "/auctions/residential-real-estate-auction",
-      "destination": "/auctions/2392-se-fruit-ave/",
-      "permanent": true
-    },
-    {
-      "source": "/auctions/residential-real-estate-auction/",
-      "destination": "/auctions/2392-se-fruit-ave/",
-      "permanent": true
-    },
-    {
-      "source": "/auctions/56-9-acres-development-property",
-      "destination": "/auctions/angle-road-development-property/",
-      "permanent": true
-    },
-    {
-      "source": "/auctions/56-9-acres-development-property/",
-      "destination": "/auctions/angle-road-development-property/",
-      "permanent": true
-    },
-    {
-      "source": "/auctions/commercial-real-estate-auction",
-      "destination": "/auctions/st-lucie-west-commercial-lots/",
-      "permanent": true
-    },
-    {
-      "source": "/auctions/commercial-real-estate-auction/",
-      "destination": "/auctions/st-lucie-west-commercial-lots/",
-      "permanent": true
-    },
-    {
-      "source": "/auctions/new-property",
+      "source": "/portfolio-items/(.*)",
       "destination": "/auctions/",
-      "permanent": true
+      "statusCode": 301
     },
     {
-      "source": "/auctions/new-property/",
+      "source": "/auction/(.*)",
       "destination": "/auctions/",
-      "permanent": true
+      "statusCode": 301
     },
     {
-      "source": "/auctions/new-property-2",
+      "source": "/auction-news/",
       "destination": "/auctions/",
-      "permanent": true
+      "statusCode": 301
     },
     {
-      "source": "/auctions/new-property-2/",
+      "source": "/tag/(.*)",
       "destination": "/auctions/",
-      "permanent": true
+      "statusCode": 301
     },
     {
-      "source": "/south-florida-real-estate-auctions-associate-auctions",
-      "destination": "/about/",
-      "permanent": true
+      "source": "/category/(.*)",
+      "destination": "/auctions/",
+      "statusCode": 301
+    },
+    {
+      "source": "/(8-lots-in-golden-gate-with-duplex|absolute-real-estate-auction-single-family-pool-home|auction-saturday-july-25th-1000-am-stuart-downtown-auction|auction-wednesday-june-17th|palm-city-on-site-real-estate-auction-july-9th|property-personal-auctions-in-stuart-fl-feb-15th-20th|real-estate-auction-danforth-palm-city-fl|real-estate-auction-fort-pierce-oct-8|real-estate-auction-in-fort-pierce-florida-on-4-acres|real-estate-auction-in-hammock-creek-palm-city-march-25th|real-estate-auction-july-23-10am-jensen-beach|real-estate-auction-single-family-home-or-assisted-living-facility|real-estate-auction-stuart-fl-aug-20|stuart-downtown-auction-aug-19th-6pm|stuart-downtown-auction-may-28th|town-of-jupiter-island-surplus-auction-december-14th|warehouse-liquidation-saturday-june-6th-at-10-am)/",
+      "destination": "/auctions/",
+      "statusCode": 301
     },
     {
       "source": "/south-florida-real-estate-auctions-associate-auctions/",
       "destination": "/about/",
-      "permanent": true
+      "statusCode": 301
     },
     {
-      "source": "/advantages",
-      "destination": "/sell/",
-      "permanent": true
-    },
-    {
-      "source": "/advantages/",
-      "destination": "/sell/",
-      "permanent": true
-    },
-    {
-      "source": "/sellers-guide",
-      "destination": "/sell/",
-      "permanent": true
-    },
-    {
-      "source": "/sellers-guide/",
-      "destination": "/sell/",
-      "permanent": true
-    },
-    {
-      "source": "/process",
-      "destination": "/sell/",
-      "permanent": true
-    },
-    {
-      "source": "/process/",
-      "destination": "/sell/",
-      "permanent": true
-    },
-    {
-      "source": "/buyers-guide",
-      "destination": "/buy/",
-      "permanent": true
-    },
-    {
-      "source": "/buyers-guide/",
-      "destination": "/buy/",
-      "permanent": true
-    },
-    {
-      "source": "/buyers",
-      "destination": "/buy/",
-      "permanent": true
-    },
-    {
-      "source": "/buyers/",
-      "destination": "/buy/",
-      "permanent": true
-    },
-    {
-      "source": "/press",
+      "source": "/about-us/",
       "destination": "/about/",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/press/",
       "destination": "/about/",
-      "permanent": true
+      "statusCode": 301
     },
     {
-      "source": "/faq",
+      "source": "/author/(.*)",
+      "destination": "/about/",
+      "statusCode": 301
+    },
+    {
+      "source": "/news/(.*)",
+      "destination": "/about/",
+      "statusCode": 301
+    },
+    {
+      "source": "/index.php/news/(.*)",
+      "destination": "/about/",
+      "statusCode": 301
+    },
+    {
+      "source": "/index.php/(.*)",
+      "destination": "/auctions/",
+      "statusCode": 301
+    },
+    {
+      "source": "/contact/",
+      "destination": "/#analysis",
+      "statusCode": 301
+    },
+    {
+      "source": "/advantages/",
       "destination": "/sell/",
-      "permanent": true
+      "statusCode": 301
+    },
+    {
+      "source": "/sellers-guide/",
+      "destination": "/sell/",
+      "statusCode": 301
+    },
+    {
+      "source": "/seller-information/",
+      "destination": "/sell/",
+      "statusCode": 301
+    },
+    {
+      "source": "/services/",
+      "destination": "/sell/",
+      "statusCode": 301
+    },
+    {
+      "source": "/process/",
+      "destination": "/sell/",
+      "statusCode": 301
     },
     {
       "source": "/faq/",
       "destination": "/sell/",
-      "permanent": true
+      "statusCode": 301
+    },
+    {
+      "source": "/faq-items/(.*)",
+      "destination": "/sell/",
+      "statusCode": 301
+    },
+    {
+      "source": "/buyers-guide/",
+      "destination": "/buy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/buyers/",
+      "destination": "/buy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/buyer-information/",
+      "destination": "/buy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/fusion_tb_category/(.*)",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/element_category/(.*)",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/feed/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/sitemap_index.xml",
+      "destination": "/sitemap-index.xml",
+      "statusCode": 301
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap-index.xml",
+      "statusCode": 301
+    },
+    {
+      "source": "/(.*-sitemap\\d*\\.xml)",
+      "destination": "/sitemap-index.xml",
+      "statusCode": 301
     }
   ]
 }

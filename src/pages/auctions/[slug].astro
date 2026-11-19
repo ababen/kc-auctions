@@ -66,7 +66,7 @@ const jsonLd = {
           <a href="#overview">Overview</a>
           <a href="#details">Details</a>
           <a href="#terms">Terms</a>
-          <a href="#documents">Documents</a>
+          {auction.documents.length > 0 && <a href="#documents">Documents</a>}
           <a href="#location">Location</a>
         </nav>
 
@@ -86,7 +86,7 @@ const jsonLd = {
           <ul class="terms">{auction.terms.map((t) => <li><Icon name="dash" size={18} stroke="#0E6B6F" />{t}</li>)}</ul>
         </section>
 
-        <section id="documents">
+        {auction.documents.length > 0 && <section id="documents">
           <h2>Documents</h2>
           <div class="docs">
             {auction.documents.map((d) => (
@@ -96,7 +96,7 @@ const jsonLd = {
               </a>
             ))}
           </div>
-        </section>
+        </section>}
 
         <section id="location">
           <h2>Location</h2>

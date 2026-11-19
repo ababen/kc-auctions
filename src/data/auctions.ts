@@ -3,13 +3,17 @@ import fruitExterior from '../assets/fruit-exterior.jpg';
 import fruitBedroom from '../assets/fruit-bedroom.jpg';
 import angleAerial from '../assets/angle-road-aerial.jpg';
 import slwAerial from '../assets/st-lucie-west-aerial.jpg';
+import us1Flyer from '../assets/us1-flyer.jpg';
+import lbvHomes from '../assets/la-buona-vita-homes.jpg';
+import lbvHome from '../assets/la-buona-vita-home.jpg';
+import montereyCondo from '../assets/monterey-condo.jpg';
 
 export type Photo = { src: ImageMetadata; alt: string };
 
 export type Auction = {
   slug: string;
   status: 'upcoming' | 'completed';
-  category: 'Residential estate' | 'Development land' | 'Commercial';
+  category: 'Residential estate' | 'Residential' | 'Condo' | 'Development land' | 'Commercial';
   format: string;
   title: string;
   shortTitle: string;
@@ -28,10 +32,176 @@ export type Auction = {
 
 const registrationForm = {
   name: 'Bidder registration form',
-  url: 'https://associateauctions.com/wp-content/uploads/2021/02/AUCTION-REGISTRATION-20.pdf',
+  url: '/wp-content/uploads/2021/02/AUCTION-REGISTRATION-20.pdf',
 };
 
+const laBuonaVita =
+  'La Buona Vita CO-OP is a deed-restricted 55+ community on US 1 in Port St. Lucie: 189 homes on 45 acres around a 6-acre stocked lake, with a clubhouse, pool, pickleball and shuffleboard courts, card rooms and a banquet room.';
+
+const lbvTerms = [
+  'Sells to the highest bidder regardless of price',
+  'Sells on an “as is” basis',
+  '10% buyer’s premium charged',
+  '$10,000 cash or cashier’s check required to bid',
+  '10% deposit collected on auction day; balance at closing within 10 days of auction',
+  'Possession at closing',
+  'Bidder information package available upon request',
+  'Auction conducted in the community clubhouse, rain or shine',
+];
+
 export const auctions: Auction[] = [
+  {
+    // Slug kept identical to the old WordPress URL so existing rankings carry over.
+    slug: 'real-estate-auction-2-1-riverside-condo-at-monterey-yacht-country-club',
+    status: 'completed',
+    category: 'Condo',
+    format: 'Live on-site auction',
+    title: '2/1 Riverside Condo at Monterey Yacht & Country Club',
+    shortTitle: 'Monterey Yacht & Country Club condo',
+    city: 'Stuart',
+    cardLine: 'Stuart · 2 bd / 1 ba riverside condo, 55+ community',
+    subtitle: 'Monterey Yacht & Country Club, Stuart, Florida · 2-bedroom riverside condo · 55+ community on the St. Lucie River',
+    overview:
+      'A live, on-site auction for a 2-bedroom, 1-bathroom riverside condo in Monterey Yacht & Country Club, a 55+ community on the St. Lucie River. The 819 sq ft CBS condo has wood floors and a screen-enclosed balcony, with resort-style amenities minutes from historic downtown Stuart.',
+    highlights: ['2 bd / 1 ba', '819 sq ft', 'Screened balcony', '55+ community'],
+    specs: [
+      { label: 'Bedrooms', value: '2' },
+      { label: 'Bathrooms', value: '1' },
+      { label: 'Living area', value: '819 sq ft' },
+      { label: 'Construction', value: 'CBS' },
+      { label: 'Floors', value: 'Wood' },
+      { label: 'Balcony', value: 'Screen-enclosed' },
+      { label: 'Community', value: '55+, on the St. Lucie River' },
+      { label: 'Golf', value: 'Executive 9-hole course (P.B. Dye)' },
+      { label: 'Amenities', value: 'Two clubhouses, fitness center, pools, bocce, shuffleboard' },
+    ],
+    terms: [
+      'Sells on an “as is” basis',
+      '10% buyer’s premium',
+      '$10,000 cashier’s check required to bid',
+      '10% deposit collected on auction day; balance due within 30 days',
+      'Possession with deed',
+      'Owner’s title insurance provided by seller; buyer pays all other closing costs',
+      'Current-year property taxes prorated to the day of auction',
+      'Broker participation and cooperation with pre-qualified agents welcome',
+      'Auction held on site, rain or shine',
+    ],
+    documents: [],
+    address: 'Monterey Yacht & Country Club, Stuart, FL',
+    summary: [
+      { label: 'To qualify', value: '$10,000' },
+      { label: 'Buyer’s premium', value: '10%' },
+      { label: 'Deposit', value: '10% on auction day' },
+      { label: 'Closing', value: 'Within 30 days' },
+    ],
+    photos: [
+      { src: montereyCondo, alt: 'Two-story condo building at Monterey Yacht & Country Club with palm trees, an arrow marking the unit' },
+    ],
+  },
+  {
+    slug: 'auction-home-in-lakefront-private-community-in-port-st-lucie',
+    status: 'completed',
+    category: 'Residential',
+    format: 'Absolute auction',
+    title: 'Home in Lakefront Private Community',
+    shortTitle: '490 La Buona Vita Drive',
+    city: 'Port St. Lucie',
+    cardLine: 'Port St. Lucie · 2 bd / 2 ba, 55+ lakefront community',
+    subtitle: '490 La Buona Vita Drive, Port St. Lucie, Florida · La Buona Vita CO-OP · sold to the highest bidder regardless of price',
+    overview: `A 2-bedroom, 2-bathroom manufactured home on a corner lot with central air, sold at public auction to the highest bidder regardless of price. ${laBuonaVita}`,
+    highlights: ['2 bd / 2 ba', 'Corner lot', 'Central air', '55+ community'],
+    specs: [
+      { label: 'Bedrooms', value: '2' },
+      { label: 'Bathrooms', value: '2' },
+      { label: 'Lot', value: 'Corner lot' },
+      { label: 'Cooling', value: 'Central air' },
+      { label: 'Community', value: 'La Buona Vita CO-OP (55+)' },
+      { label: 'Auction site', value: 'Lakefront clubhouse, 8601 S Federal Hwy' },
+    ],
+    terms: lbvTerms,
+    documents: [],
+    address: '490 La Buona Vita Drive, Port St. Lucie, FL 34952',
+    summary: [
+      { label: 'To qualify', value: '$10,000' },
+      { label: 'Buyer’s premium', value: '10%' },
+      { label: 'Deposit', value: '10% on auction day' },
+      { label: 'Closing', value: 'Within 10 days' },
+    ],
+    photos: [{ src: lbvHome, alt: 'Single-story manufactured home with white siding on a corner lot in La Buona Vita' }],
+  },
+  {
+    slug: 'auction-2-homes-in-lakefront-private-community-in-port-st-lucie',
+    status: 'completed',
+    category: 'Residential',
+    format: 'Absolute auction',
+    title: '2 Homes in Lakefront Private Community',
+    shortTitle: '2 homes at La Buona Vita',
+    city: 'Port St. Lucie',
+    cardLine: 'Port St. Lucie · two 2 bd / 2 ba homes, 55+ community',
+    subtitle: '8590 Mary Ann Lane & 541 Natalie Drive, Port St. Lucie, Florida · La Buona Vita CO-OP · sold to the highest bidder regardless of price',
+    overview: `Two 2-bedroom, 2-bathroom manufactured homes sold at public auction to the highest bidder regardless of price. Property A, 8590 Mary Ann Lane, sits on a lakefront lot with central air; Property B, 541 Natalie Drive, is on an interior lot with forced air. ${laBuonaVita}`,
+    highlights: ['Two homes', '2 bd / 2 ba each', 'Lakefront lot (A)', '55+ community'],
+    specs: [
+      { label: 'Property A', value: '8590 Mary Ann Lane' },
+      { label: 'A: beds / baths', value: '2 / 2' },
+      { label: 'A: lot', value: 'Lakefront, 2,133 sq ft' },
+      { label: 'Property B', value: '541 Natalie Drive' },
+      { label: 'B: beds / baths', value: '2 / 2' },
+      { label: 'B: lot', value: 'Interior, 1,572 sq ft' },
+      { label: 'Community', value: 'La Buona Vita CO-OP (55+)' },
+      { label: 'Auction site', value: 'Lakefront clubhouse, 8601 S Federal Hwy' },
+    ],
+    terms: lbvTerms,
+    documents: [],
+    address: '8601 S Federal Hwy, Port St. Lucie, FL 34952',
+    summary: [
+      { label: 'To qualify', value: '$10,000' },
+      { label: 'Buyer’s premium', value: '10%' },
+      { label: 'Deposit', value: '10% on auction day' },
+      { label: 'Closing', value: 'Within 10 days' },
+    ],
+    photos: [{ src: lbvHomes, alt: 'White manufactured home with carport and palm trees in La Buona Vita' }],
+  },
+  {
+    slug: '6019-s-us-highway-1',
+    status: 'completed',
+    category: 'Development land',
+    format: 'On-site auction',
+    title: '9.74-Acre Development Land',
+    shortTitle: '9.74 acres on US-1',
+    city: 'Fort Pierce',
+    cardLine: 'Fort Pierce · commercial general zoning, US-1 frontage',
+    subtitle: '6019 S US Highway 1, Fort Pierce, Florida · St. Lucie County · sold to the highest bidder regardless of price',
+    overview:
+      'A 9.74-acre vacant parcel with 100 feet of direct frontage on US Highway 1, zoned Commercial General in St. Lucie County. Sold at public auction on site to the highest bidder regardless of price.',
+    highlights: ['9.74 acres', '100 ft of US-1 frontage', 'Commercial General zoning', 'Vacant land'],
+    specs: [
+      { label: 'Total size', value: '9.74 acres (424,274 sq ft)' },
+      { label: 'Frontage', value: '100 ft on US Highway 1' },
+      { label: 'Zoning', value: 'Commercial General' },
+      { label: 'Jurisdiction', value: 'St. Lucie County' },
+      { label: 'Parcel ID', value: '3410-702-0057-000-7' },
+      { label: 'Status', value: 'Vacant land' },
+    ],
+    terms: [
+      '10% buyer’s premium charged',
+      '$100,000 cash or cashier’s check required to qualify to bid',
+      '10% deposit collected on auction day; balance at closing within 30 days, time being of the essence',
+      'Possession with deed',
+      'Owner’s title insurance provided by seller; all other closing costs paid by buyer',
+      'Current-year property taxes prorated to the day of auction',
+      'Broker participation form and bidder information package available upon request',
+    ],
+    documents: [registrationForm],
+    address: '6019 S US Highway 1, Fort Pierce, FL',
+    summary: [
+      { label: 'To qualify', value: '$100,000' },
+      { label: 'Buyer’s premium', value: '10%' },
+      { label: 'Deposit', value: '10% on auction day' },
+      { label: 'Closing', value: 'Within 30 days' },
+    ],
+    photos: [{ src: us1Flyer, alt: 'Auction flyer for 9.74 acres at 6019 S US Highway 1, Fort Pierce, with an aerial of the parcel' }],
+  },
   {
     slug: 'angle-road-development-property',
     status: 'completed',
@@ -68,8 +238,8 @@ export const auctions: Auction[] = [
       'Auction conducted on site, rain or shine',
     ],
     documents: [
-      { name: 'Bidder information package', url: 'https://associateauctions.com/wp-content/uploads/2021/02/Fiery-Color-003-3.pdf' },
-      { name: 'Broker participation form', url: 'https://associateauctions.com/wp-content/uploads/2021/02/Up-to-2-broker-participation-57-Acres-.pdf' },
+      { name: 'Bidder information package', url: '/wp-content/uploads/2021/02/Fiery-Color-003-3.pdf' },
+      { name: 'Broker participation form', url: '/wp-content/uploads/2021/02/Up-to-2-broker-participation-57-Acres-.pdf' },
       registrationForm,
     ],
     address: '0 Angle Road, Fort Pierce, FL 34947',
@@ -170,8 +340,8 @@ export const auctions: Auction[] = [
       'Broker participation offered to qualified agents',
     ],
     documents: [
-      { name: 'Bidder information package', url: 'https://associateauctions.com/wp-content/uploads/2021/03/BIP-Fruit-Ave.pdf' },
-      { name: 'Broker participation form', url: 'https://associateauctions.com/wp-content/uploads/2021/03/Up-to-2-broker-participation-2392-SE-Fruit-Ave.pdf' },
+      { name: 'Bidder information package', url: '/wp-content/uploads/2021/03/BIP-Fruit-Ave.pdf' },
+      { name: 'Broker participation form', url: '/wp-content/uploads/2021/03/Up-to-2-broker-participation-2392-SE-Fruit-Ave.pdf' },
       registrationForm,
     ],
     address: '2392 SE Fruit Ave, Port St. Lucie, FL 34952',
@@ -190,7 +360,6 @@ export const auctions: Auction[] = [
 
 /** Smaller past auctions with no detail page or photos (yet). */
 export const otherPastAuctions = [
-  { category: 'Development land', title: '9.74 acres on US-1', place: 'Fort Pierce', icon: 'land' },
   { category: 'Vehicle', title: '1953 GMC 9300 pickup', place: 'Stuart · online + live virtual 3-D auction', icon: 'truck' },
   { category: 'Vehicle', title: '’07 Harley-Davidson Softail', place: 'Stuart', icon: 'bike' },
 ] as const;
