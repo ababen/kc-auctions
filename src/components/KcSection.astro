@@ -1,0 +1,34 @@
+---
+import { Image } from 'astro:assets';
+import kc from '../assets/kc-daniel.jpg';
+import { site } from '../data/site';
+
+interface Props { showLink?: boolean }
+const { showLink = true } = Astro.props;
+---
+<section id="kc" class="section">
+  <div class="container kc">
+    <div class="kc-photo">
+      <Image src={kc} alt="KC Daniel, auctioneer and broker, in a navy suit" widths={[400, 700]} sizes="(max-width: 700px) 100vw, 460px" />
+      <div class="license"><b>{site.auctioneerLicense} · {site.brokerLicense}</b>Licensed in Florida</div>
+    </div>
+    <div class="kc-copy">
+      <div class="eyebrow">Your auctioneer</div>
+      <h2 class="h2" style="margin: 0;">KC Daniel, J.D.</h2>
+      <p class="lead">A second-generation auctioneer who joined his father's business in 2000, KC is a Florida real estate broker and attorney by training. He handles estates, partnership dissolutions, land, commercial property and vehicles, and teaches real estate and law at Indian River State College.</p>
+      <ul class="creds">
+        <li>2010 Florida Bid Calling Champion</li>
+        <li>State Ambassador, National Auctioneers Association</li>
+        <li>Board, Florida Auctioneers Association</li>
+        <li>Board, Martin County Estate Planning Council</li>
+        <li>J.D., Nova Southeastern University</li>
+        <li>B.S. Finance &amp; Real Estate, Florida Atlantic University</li>
+      </ul>
+      <a class="press-card" href={site.stuartMagazineUrl} target="_blank" rel="noopener">
+        <small>As featured in</small>
+        <span><b>Stuart Magazine: “Smooth Talker: K.C. Daniel”</b><span>“Men of Martin County,” June 2021 · Read the story ↗</span></span>
+      </a>
+      {showLink && <a href="/about/" style="font-weight: 600;">More about KC →</a>}
+    </div>
+  </div>
+</section>

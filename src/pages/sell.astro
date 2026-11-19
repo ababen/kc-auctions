@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import LeadForm from '../components/LeadForm.astro';
+
+const reasons = [
+  ['You decide the date', 'The property sells on auction day, not whenever a buyer finally shows up.'],
+  ['You decide the terms', 'Deposit, closing timeline, reserve or absolute. The terms are set before marketing begins.'],
+  ['Your property stands out', 'A dated, public event creates urgency that a standing listing can’t.'],
+  ['Business done in the open', 'Bidders compete publicly, so everyone sees the same rules and the same price.'],
+  ['True market value', 'Competitive bidding shows what the market will actually pay today.'],
+];
+const faqs = [
+  ['How long does the auction process take?', 'It depends on the size and scope of the property. Typically there is a 30-day marketing window and a 30-day closing period.'],
+  ['What kinds of property do you auction?', 'Homes, development land, commercial lots, estates and personal property, vehicles and equipment, and benefit auctions for nonprofits.'],
+  ['Who is a good fit for auction?', 'Families settling an estate, trustees, investors reallocating assets, and owners who want a firm date and a public price. KC will tell you honestly if a traditional listing would serve you better.'],
+  ['How do buyers qualify?', 'Each auction publishes its terms: typically a cash or cashier’s check deposit to qualify, a buyer’s premium, and a 10% deposit on auction day with the balance at closing.'],
+];
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+};
+---
+<Layout
+  title="Sell at Auction | Associate Auctions, Treasure Coast FL"
+  description="Why sell your Florida property at auction: you set the date and terms, buyers compete in the open, and most sales close about 60 days from start."
+  jsonLd={jsonLd}
+>
+  <section class="page-head">
+    <div class="container">
+      <div class="eyebrow">For sellers</div>
+      <h1>Sell on your terms, on your date.</h1>
+      <p class="lead" style="max-width: 720px;">Proper use of the auction method is a powerful tool for individuals, families and investors who want to reallocate their assets.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="steps">
+        {reasons.map(([t, b], i) => (
+          <div class="step">
+            <div class="num"><b>{String(i + 1).padStart(2, '0')}</b></div>
+            <h3>{t}</h3>
+            <p>{b}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="container" style="max-width: 900px;">
+      <div class="eyebrow">Questions</div>
+      <h2 class="h2" style="margin-bottom: 32px;">Selling at auction: FAQ</h2>
+      <div class="stack" style="gap: 12px;">
+        {faqs.map(([q, a]) => (
+          <details style="background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 16px; padding: 18px 22px;">
+            <summary style="cursor: pointer; font-weight: 700; font-size: 18px;">{q}</summary>
+            <p style="margin-top: 12px; color: #c9d3dd; line-height: 1.6;">{a}</p>
+          </details>
+        ))}
+      </div>
+      <a class="btn btn--gold btn--lg" href="/auctions/" style="margin-top: 32px;">See past auctions <Icon name="arrow" size={18} /></a>
+    </div>
+  </section>
+
+  <LeadForm />
+</Layout>

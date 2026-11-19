@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+---
+<Layout title="Thank you | Associate Auctions" description="Thanks for contacting Associate Auctions.">
+  <section class="page-head" style="min-height: 50vh;">
+    <div class="container">
+      <div class="eyebrow">Received</div>
+      <h1 data-thanks-title>Thanks — KC has your request.</h1>
+      <p class="lead" data-thanks-body>Need an answer sooner? Call or text <a href={site.phoneHref}>{site.phone}</a>.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px;">
+        <a class="btn btn--ink" href="/">Back to home</a>
+        <a class="btn btn--outline" href="/auctions/">See past auctions</a>
+      </div>
+    </div>
+  </section>
+  <script>
+    if (new URLSearchParams(location.search).get('form') === 'alerts') {
+      const t = document.querySelector('[data-thanks-title]');
+      const b = document.querySelector('[data-thanks-body]');
+      if (t) t.textContent = 'You’re on the list.';
+      if (b) b.textContent = 'We’ll let you know the day the next auction is announced.';
+    }
+  </script>
+</Layout>

@@ -1,0 +1,159 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import AlertsForm from '../components/AlertsForm.astro';
+import AuctionCard from '../components/AuctionCard.astro';
+import PastAuctions from '../components/PastAuctions.astro';
+import KcSection from '../components/KcSection.astro';
+import LeadForm from '../components/LeadForm.astro';
+import kc from '../assets/kc-daniel.jpg';
+import { upcomingAuctions, pastAuctions, otherPastAuctions } from '../data/auctions';
+
+const sellPoints = [
+  'You decide the date the property sells',
+  'You decide the terms of the transaction',
+  'Competitive bidding finds true market value',
+  'Business done in the open, in public',
+  'Estates, trusts, land, commercial and vehicles',
+];
+const buyPoints = [
+  'Terms, deposit and buyer’s premium published before the sale',
+  'Bidder information package for every property',
+  'Broker participation offered to qualified agents',
+  'Inspection by appointment with KC',
+  'Alerts the day a new auction is announced',
+];
+const steps = [
+  { n: '01', when: 'Day one', title: 'Free consultation', body: 'KC reviews your property and goals and tells you honestly whether auction is the right fit.' },
+  { n: '02', when: '~30 days', title: 'Targeted marketing', body: 'Photography, signage, mailers, email alerts, AuctionZip, social media and broker participation.' },
+  { n: '03', when: 'Auction day', title: 'Live competitive bidding', body: 'Qualified bidders compete in the open, so the market sets the price.' },
+  { n: '04', when: '~30 days', title: 'Close', body: 'Deposit collected on auction day; balance at closing within 30 days.' },
+];
+const ticker = [
+  ...pastAuctions.map((a) => `${a.shortTitle} · ${a.city}`),
+  ...otherPastAuctions.map((m) => `${m.title} · ${m.place.split(' · ')[0]}`),
+];
+---
+<Layout
+  title="Associate Auctions | Treasure Coast & South Florida Real Estate Auctions"
+  description="Associate Auctions and KC Daniel, 2010 Florida Bid Calling Champion, sell real estate, land, estates and vehicles at auction across the Treasure Coast and South Florida."
+>
+  <section class="dark hero">
+    <div class="container">
+      <div class="hero-copy">
+        <div class="eyebrow">Treasure Coast · South Florida auctions</div>
+        <h1>Real auctions.<br /><em>Real results.</em></h1>
+        <p class="lead" style="font-size: 19px; max-width: 560px;">You pick the date. You set the terms. Your property goes to the open market and finds its true value, with a state-champion auctioneer calling the bids. Typically 30 days of marketing and a 30-day closing.</p>
+        <div class="hero-actions">
+          <a class="btn btn--gold btn--lg" href="#analysis">I'm selling — free analysis <Icon name="arrow" size={18} /></a>
+          <a class="btn btn--outline btn--lg" href="#alerts">I'm buying — get alerts</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <Image src={kc} alt="KC Daniel, auctioneer and broker" widths={[400, 700, 960]} sizes="(max-width: 700px) 100vw, 480px" loading="eager" fetchpriority="high" />
+        <div class="badge-float">
+          <Icon name="medal" size={34} stroke="#9A6B12" />
+          <div><strong>Florida Bid Calling Champion</strong><span>Florida Auctioneers Association, 2010</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-label="Recent auctions">
+    <div class="ticker-track">
+      {[...ticker, ...ticker].map((t, i) => (
+        <>
+          <span aria-hidden={i >= ticker.length ? 'true' : undefined}>AUCTIONED · {t}</span>
+          <span aria-hidden="true">◆</span>
+        </>
+      ))}
+    </div>
+  </div>
+
+  <section id="alerts" class="section" style="padding-bottom: 40px;">
+    <div class="container">
+      <div class="eyebrow">On the block</div>
+      <h2 class="h2" style="margin-bottom: 32px;">Upcoming auctions</h2>
+      {upcomingAuctions.length > 0 && (
+        <div class="grid-cards" style="margin-bottom: 24px;">
+          {upcomingAuctions.map((a) => <AuctionCard auction={a} />)}
+        </div>
+      )}
+      <div class="panel split" style="box-shadow: 0 24px 60px rgba(11,23,36,.08);">
+        <div class="stack" style="flex-basis: 520px; gap: 18px;">
+          <h3 style="font-size: 32px; font-weight: 700; line-height: 1.1;">New auctions are announced here first.</h3>
+          <p class="lead" style="font-size: 17px;">
+            {upcomingAuctions.length === 0
+              ? 'No auctions are open for bidding right now. Leave your email or mobile number and you’ll hear the day the next property, estate or vehicle auction is announced.'
+              : 'Leave your email or mobile number and you’ll hear the day each new auction is announced.'}
+          </p>
+          <AlertsForm />
+        </div>
+        <div class="teal-block">
+          <div class="kicker">Selling?</div>
+          <div class="big">Your property could be the next one on this page.</div>
+          <a class="btn btn--light" href="#analysis" style="align-self: flex-start;">Get a free auction analysis →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container paths">
+      <div class="dark">
+        <div class="eyebrow">For sellers</div>
+        <h2>Sell on your terms, on your date.</h2>
+        <ul class="check-list">{sellPoints.map((s) => <li><Icon name="check" stroke="#D9A441" />{s}</li>)}</ul>
+        <a class="btn btn--gold" href="/sell/">How selling at auction works →</a>
+      </div>
+      <div class="panel">
+        <div class="eyebrow">For buyers</div>
+        <h2>Bid in the open. Know the rules up front.</h2>
+        <ul class="check-list" style="color: var(--body);">{buyPoints.map((b) => <li><Icon name="check" stroke="#0E6B6F" />{b}</li>)}</ul>
+        <a class="btn btn--ink" href="/buy/">How buying at auction works →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 48px;">
+    <div class="container">
+      <div class="eyebrow">How it works</div>
+      <h2 class="h2" style="margin-bottom: 40px; max-width: 760px;">A 30-day marketing window, then a 30-day close.</h2>
+      <ol class="steps">
+        {steps.map((s) => (
+          <li class="step">
+            <div class="num"><b>{s.n}</b><span>{s.when}</span></div>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <PastAuctions />
+  <KcSection />
+
+  <section style="background: var(--paper-2);">
+    <figure class="quote">
+      <svg width="56" height="44" viewBox="0 0 56 44" aria-hidden="true"><path d="M0 44V26C0 11 8 2 22 0l2 6C15 9 12 15 12 22h10v22H0zm32 0V26C32 11 40 2 54 0l2 6c-9 3-12 9-12 16h10v22H32z" fill="#0E6B6F"></path></svg>
+      <blockquote>The auction was over the top. You were absolutely right when you said, “Relax, I will handle this for you. It’s what I do best.” Associate Auctions is 5 stars any day in my book — only because there aren’t 10 stars.</blockquote>
+      <figcaption><strong>Donna Shelden DiLeo</strong> · Client</figcaption>
+    </figure>
+  </section>
+
+  <section class="section--tight">
+    <div class="container members">
+      <div class="eyebrow" style="color: var(--muted);">Member &amp; partner</div>
+      <ul>
+        <li>National Auctioneers Association</li>
+        <li>Florida Auctioneers Association</li>
+        <li>Habitat for Humanity</li>
+        <li>NAEPC</li>
+      </ul>
+    </div>
+  </section>
+
+  <LeadForm />
+</Layout>

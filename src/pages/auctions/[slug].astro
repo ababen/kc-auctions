@@ -1,0 +1,153 @@
+---
+import { Image } from 'astro:assets';
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+import AlertsForm from '../../components/AlertsForm.astro';
+import kc from '../../assets/kc-daniel.jpg';
+import { auctions, mapUrl, type Auction } from '../../data/auctions';
+import { site } from '../../data/site';
+import { getImage } from 'astro:assets';
+
+export const getStaticPaths = (() =>
+  auctions.map((auction) => ({ params: { slug: auction.slug }, props: { auction } }))) satisfies GetStaticPaths;
+
+interface Props { auction: Auction }
+const { auction } = Astro.props;
+const [hero, ...rest] = auction.photos;
+const others = auctions.filter((a) => a.slug !== auction.slug);
+const og = await getImage({ src: hero.src, width: 1200, format: 'jpg' });
+const completed = auction.status === 'completed';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: `${auction.title} — ${auction.format}`,
+  description: auction.overview,
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  location: { '@type': 'Place', name: auction.title, address: auction.address },
+  image: new URL(og.src, Astro.site).toString(),
+  organizer: { '@type': 'Organization', name: site.name, url: site.url },
+};
+---
+<Layout
+  title={`${auction.title}, ${auction.city} | Associate Auctions`}
+  description={`${auction.category} auction: ${auction.subtitle}. Terms, details and bidder documents.`}
+  image={og.src}
+  jsonLd={completed ? undefined : jsonLd}
+>
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/auctions/">Auctions</a><span aria-hidden="true">/</span>
+      <a href="/auctions/#past">Past auctions</a><span aria-hidden="true">/</span>
+      <span aria-current="page" style="color: var(--ink); font-weight: 600;">{auction.shortTitle}</span>
+    </nav>
+
+    <div class="pills">
+      <span class="pill pill--ink">{completed ? 'Auction completed' : 'Upcoming auction'}</span>
+      <span class="pill pill--teal">{auction.category}</span>
+    </div>
+    <h1 class="detail-title">{auction.title}</h1>
+    <p class="lead" style="margin-bottom: 28px;">{auction.subtitle}</p>
+
+    <div class="detail-layout">
+      <div class="detail-main">
+        <div>
+          <Image class="gallery-main" src={hero.src} alt={hero.alt} widths={[640, 960, 1400]} sizes="(max-width: 960px) 100vw, 820px" loading="eager" fetchpriority="high" />
+          {rest.length > 0 && (
+            <div class="thumbs">
+              {rest.map((p) => <Image src={p.src} alt={p.alt} widths={[300, 500]} sizes="200px" />)}
+            </div>
+          )}
+        </div>
+
+        <nav class="subnav" aria-label="On this page">
+          <a href="#overview">Overview</a>
+          <a href="#details">Details</a>
+          <a href="#terms">Terms</a>
+          <a href="#documents">Documents</a>
+          <a href="#location">Location</a>
+        </nav>
+
+        <section id="overview">
+          <h2>Overview</h2>
+          <p class="lead" style="font-size: 17px; line-height: 1.7;">{auction.overview}</p>
+          <ul class="tags">{auction.highlights.map((h) => <li><Icon name="check" size={16} stroke="#0E6B6F" />{h}</li>)}</ul>
+        </section>
+
+        <section id="details">
+          <h2>Property details</h2>
+          <dl class="specs">{auction.specs.map((s) => <div><dt>{s.label}</dt><dd>{s.value}</dd></div>)}</dl>
+        </section>
+
+        <section id="terms">
+          <h2>Terms &amp; conditions</h2>
+          <ul class="terms">{auction.terms.map((t) => <li><Icon name="dash" size={18} stroke="#0E6B6F" />{t}</li>)}</ul>
+        </section>
+
+        <section id="documents">
+          <h2>Documents</h2>
+          <div class="docs">
+            {auction.documents.map((d) => (
+              <a class="doc" href={d.url} target="_blank" rel="noopener">
+                <span class="ic"><Icon name="doc" size={20} /></span>
+                <span><b>{d.name}</b><small>PDF</small></span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section id="location">
+          <h2>Location</h2>
+          <div class="panel location">
+            <span><Icon name="pin" stroke="#B42318" />{auction.address}</span>
+            <a class="btn btn--outline" href={mapUrl(auction.address)} target="_blank" rel="noopener">Open in Google Maps ↗</a>
+          </div>
+        </section>
+      </div>
+
+      <aside class="detail-side" aria-label="Auction summary">
+        <div class="summary">
+          <div class="head"><b>{completed ? 'Auction completed' : 'Upcoming'}</b><span>{auction.format}</span></div>
+          <dl>{auction.summary.map((s) => <div><dt>{s.label}</dt><dd>{s.value}</dd></div>)}</dl>
+          {completed ? (
+            <>
+              <p style="color: #c9d3dd;">Bidding on this property has closed. Want first word on the next one?</p>
+              <a class="btn btn--gold btn--lg btn--block" href="/#alerts">Get auction alerts</a>
+              <a class="btn btn--outline-dim btn--block" href="/#analysis">Sell a property like this</a>
+            </>
+          ) : (
+            <a class="btn btn--gold btn--lg btn--block" href={site.phoneHref}>Call to register: {site.phone}</a>
+          )}
+        </div>
+        <div class="panel ask">
+          <Image src={kc} alt="KC Daniel" width={128} height={128} />
+          <div>
+            <b>Questions? Ask KC.</b>
+            <a href={site.phoneHref} style="font-weight: 600;">{site.phone}</a>
+            <a href={`mailto:${site.email}`} style="font-size: 13px; color: #3a4b5c;">{site.email}</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <section class="section--tight" style="background: var(--paper-2);">
+    <div class="container">
+      <h2 class="h2" style="font-size: 30px; margin-bottom: 20px;">More past auctions</h2>
+      <div class="docs">
+        {others.map((o) => (
+          <a class="doc" href={`/auctions/${o.slug}/`}>
+            <span class="ic"><Icon name={o.category === 'Development land' ? 'land' : 'pin'} size={20} /></span>
+            <span><b>{o.title}</b><small>{o.category} · {o.city}</small></span>
+          </a>
+        ))}
+      </div>
+      <div class="panel" style="padding: 28px; margin-top: 28px; display: flex; flex-direction: column; gap: 14px;">
+        <h3 style="font-size: 24px;">Hear about the next auction first</h3>
+        <AlertsForm />
+      </div>
+    </div>
+  </section>
+</Layout>

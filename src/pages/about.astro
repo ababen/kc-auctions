@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import KcSection from '../components/KcSection.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { site } from '../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'KC Daniel',
+  jobTitle: 'Auctioneer and Real Estate Broker',
+  worksFor: { '@type': 'Organization', name: site.name },
+  alumniOf: ['Nova Southeastern University', 'Florida Atlantic University', 'Indian River State College'],
+  award: '2010 Florida Auctioneers Association Bid Calling Champion',
+  sameAs: [site.stuartMagazineUrl],
+};
+---
+<Layout
+  title="About KC Daniel | Associate Auctions"
+  description="KC Daniel is a second-generation auctioneer, Florida real estate broker and J.D., and the 2010 Florida Bid Calling Champion. Founder of Associate Auctions in Stuart, FL."
+  jsonLd={jsonLd}
+>
+  <section class="page-head">
+    <div class="container">
+      <div class="eyebrow">About</div>
+      <h1>Associate Auctions &amp; KC Daniel</h1>
+      <div class="prose">
+        <p>Associate Auctions is a Treasure Coast auction company based in Stuart, Florida. It is dedicated to the values and traditions of auction history while developing new ways to bring buyers and sellers together.</p>
+        <p>KC Daniel grew up around auctions. In 2000 he moved his young family to Stuart and joined his father's auction business, Karlin Daniel &amp; Associates, learning the trade from the ground up. Along the way he earned degrees in finance and real estate from Florida Atlantic University and a law degree from Nova Southeastern University, because, as he puts it, “we deal with estate and partnership dissolution, so knowing what the attorneys are talking about is extremely important.”</p>
+        <p>After law school he worked as a lawyer for a circuit court judge, then as a public policy advocate, and taught law-related courses at Indian River State College. Winning the Florida Auctioneers Association Bid-Calling Championship in 2010 settled it: he launched Associate Auctions to handle estate liquidations and real estate sales.</p>
+        <h2>Why it matters to sellers</h2>
+        <p>An auction does more than sell property. For families settling an estate, it often brings relief: a clear date, a fair public price and one less thing to manage. “It’s one of the feel-good parts of my profession,” KC told Stuart Magazine.</p>
+        <p>KC has also called benefit auctions for local nonprofits, including the Education Foundation of Martin County’s 25th-anniversary celebration.</p>
+      </div>
+    </div>
+  </section>
+  <KcSection showLink={false} />
+  <LeadForm />
+</Layout>
