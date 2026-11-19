@@ -4,22 +4,22 @@
   "trailingSlash": true,
   "redirects": [
     {
-      "source": "/auctions/residential-real-estate-auction(?:/.*)?",
+      "source": "/auctions/residential-real-estate-auction/(.*)",
       "destination": "/auctions/2392-se-fruit-ave/",
       "statusCode": 301
     },
     {
-      "source": "/auctions/56-9-acres-development-property(?:/.*)?",
+      "source": "/auctions/56-9-acres-development-property/(.*)",
       "destination": "/auctions/angle-road-development-property/",
       "statusCode": 301
     },
     {
-      "source": "/auctions/commercial-real-estate-auction(?:/.*)?",
+      "source": "/auctions/commercial-real-estate-auction/(.*)",
       "destination": "/auctions/st-lucie-west-commercial-lots/",
       "statusCode": 301
     },
     {
-      "source": "/auctions/6019-s-us-highway-1-2(?:/.*)?",
+      "source": "/auctions/6019-s-us-highway-1-2/(.*)",
       "destination": "/auctions/6019-s-us-highway-1/",
       "statusCode": 301
     },
@@ -29,17 +29,17 @@
       "statusCode": 301
     },
     {
-      "source": "/auctions/(auction-2-homes-in-lakefront-private-community-in-port-st-lucie|auction-home-in-lakefront-private-community-in-port-st-lucie|real-estate-auction-2-1-riverside-condo-at-monterey-yacht-country-club|6019-s-us-highway-1)/.+",
+      "source": "/auctions/(auction-2-homes-in-lakefront-private-community-in-port-st-lucie|auction-home-in-lakefront-private-community-in-port-st-lucie|real-estate-auction-2-1-riverside-condo-at-monterey-yacht-country-club|6019-s-us-highway-1)/(.+)",
       "destination": "/auctions/$1/",
       "statusCode": 301
     },
     {
-      "source": "/auctions/new-property(?:/.*)?",
+      "source": "/auctions/new-property/(.*)",
       "destination": "/auctions/",
       "statusCode": 301
     },
     {
-      "source": "/auctions/new-property-2(?:/.*)?",
+      "source": "/auctions/new-property-2/(.*)",
       "destination": "/auctions/",
       "statusCode": 301
     },
@@ -49,12 +49,12 @@
       "statusCode": 301
     },
     {
-      "source": "/auctions/(category|tag|list|month|today|week|day|photo|map|page)(?:/.*)?",
+      "source": "/auctions/(category|tag|list|month|today|week|day|photo|map|page)/(.*)",
       "destination": "/auctions/",
       "statusCode": 301
     },
     {
-      "source": "/auctions/(\\d{4}-\\d{2}-\\d{2}|\\d{4}-\\d{2})(?:/.*)?",
+      "source": "/auctions/(\\d{4}-\\d{2}-\\d{2}|\\d{4}-\\d{2})/(.*)",
       "destination": "/auctions/",
       "statusCode": 301
     },
@@ -64,12 +64,12 @@
       "statusCode": 301
     },
     {
-      "source": "/upcoming-auctions(?:/.*)?",
+      "source": "/upcoming-auctions/(.*)",
       "destination": "/auctions/",
       "statusCode": 301
     },
     {
-      "source": "/associateauctions(?:/.*)?",
+      "source": "/associateauctions/(.*)",
       "destination": "/auctions/",
       "statusCode": 301
     },
@@ -89,12 +89,12 @@
       "statusCode": 301
     },
     {
-      "source": "/portfolio-items(?:/.*)?",
+      "source": "/portfolio-items/(.*)",
       "destination": "/auctions/",
       "statusCode": 301
     },
     {
-      "source": "/auction(?:/.*)?",
+      "source": "/auction/(.*)",
       "destination": "/auctions/",
       "statusCode": 301
     },
@@ -104,12 +104,12 @@
       "statusCode": 301
     },
     {
-      "source": "/tag(?:/.*)?",
+      "source": "/tag/(.*)",
       "destination": "/auctions/",
       "statusCode": 301
     },
     {
-      "source": "/category(?:/.*)?",
+      "source": "/category/(.*)",
       "destination": "/auctions/",
       "statusCode": 301
     },
@@ -134,22 +134,22 @@
       "statusCode": 301
     },
     {
-      "source": "/author(?:/.*)?",
+      "source": "/author/(.*)",
       "destination": "/about/",
       "statusCode": 301
     },
     {
-      "source": "/news(?:/.*)?",
+      "source": "/news/(.*)",
       "destination": "/about/",
       "statusCode": 301
     },
     {
-      "source": "/index.php/news(?:/.*)?",
+      "source": "/index.php/news/(.*)",
       "destination": "/about/",
       "statusCode": 301
     },
     {
-      "source": "/index.php(?:/.*)?",
+      "source": "/index.php/(.*)",
       "destination": "/auctions/",
       "statusCode": 301
     },
@@ -189,7 +189,7 @@
       "statusCode": 301
     },
     {
-      "source": "/faq-items(?:/.*)?",
+      "source": "/faq-items/(.*)",
       "destination": "/sell/",
       "statusCode": 301
     },
@@ -209,12 +209,12 @@
       "statusCode": 301
     },
     {
-      "source": "/fusion_tb_category(?:/.*)?",
+      "source": "/fusion_tb_category/(.*)",
       "destination": "/",
       "statusCode": 301
     },
     {
-      "source": "/element_category(?:/.*)?",
+      "source": "/element_category/(.*)",
       "destination": "/",
       "statusCode": 301
     },
