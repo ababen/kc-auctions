@@ -14,9 +14,12 @@ const interests = ['Real estate auctions', 'Selling a property', 'Estates & trus
         </div>
       </div>
       <div class="form-side">
-        <form name="auction-analysis" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="company" class="stack" style="gap: 16px;">
-          <input type="hidden" name="form-name" value="auction-analysis" />
-          <p class="hidden"><label>Leave this empty <input name="company" /></label></p>
+        <form action={`https://formsubmit.co/${site.email}`} method="POST" data-next="/thanks/" class="stack" style="gap: 16px;">
+          <input type="hidden" name="_subject" value="Free auction analysis request — associateauctions.com" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="" />
+          <p class="hidden"><label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off" /></label></p>
           <div class="form-row">
             <label class="field">Name <input type="text" name="name" autocomplete="name" required /></label>
             <label class="field">Phone <input type="tel" name="phone" autocomplete="tel" /></label>
