@@ -6,7 +6,8 @@ export default defineConfig({
   site: 'https://associateauctions.com',
   trailingSlash: 'always',
   integrations: [sitemap({ filter: (page) => !page.endsWith('/thanks/') })],
-  // Old WordPress URLs → new pages (keeps existing links and search rankings).
+  // Old WordPress URLs are redirected with real 301s in vercel.json (the full map lives there).
+  // These static fallbacks cover hosts that don't read vercel.json.
   redirects: {
     '/current-auctions/': '/auctions/',
     '/past-auctions/': '/auctions/',
