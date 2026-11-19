@@ -8,6 +8,7 @@ import PastAuctions from '../components/PastAuctions.astro';
 import KcSection from '../components/KcSection.astro';
 import LeadForm from '../components/LeadForm.astro';
 import kc from '../assets/kc-daniel.jpg';
+import faaLogo from '../assets/faa-logo.png';
 import { upcomingAuctions, pastAuctions, otherPastAuctions } from '../data/auctions';
 
 const sellPoints = [
@@ -53,7 +54,7 @@ const ticker = [
       <div class="hero-photo">
         <Image src={kc} alt="KC Daniel, auctioneer and broker" widths={[400, 700, 960]} sizes="(max-width: 700px) 100vw, 480px" loading="eager" fetchpriority="high" />
         <div class="badge-float">
-          <Icon name="medal" size={34} stroke="#9A6B12" />
+          <Image class="badge-logo" src={faaLogo} alt="Florida Auctioneers Association seal" width={56} height={56} />
           <div><strong>Florida Bid Calling Champion</strong><span>Florida Auctioneers Association, 2010</span></div>
         </div>
       </div>

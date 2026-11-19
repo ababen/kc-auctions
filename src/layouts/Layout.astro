@@ -155,6 +155,12 @@ const schemas = [business, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonL
       };
       toggle?.addEventListener('click', () => setOpen(!header?.classList.contains('is-open')));
       document.querySelectorAll('#mobile-nav a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+
+      // Send form visitors back to our own thank-you page after FormSubmit receives the data.
+      document.querySelectorAll<HTMLFormElement>('form[data-next]').forEach((form) => {
+        const next = form.querySelector<HTMLInputElement>('input[name="_next"]');
+        if (next) next.value = new URL(form.dataset.next ?? '/thanks/', location.origin).toString();
+      });
     </script>
   </body>
 </html>

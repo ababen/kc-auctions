@@ -1,0 +1,177 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/current-auctions",
+      "destination": "/auctions/",
+      "permanent": true
+    },
+    {
+      "source": "/current-auctions/",
+      "destination": "/auctions/",
+      "permanent": true
+    },
+    {
+      "source": "/past-auctions",
+      "destination": "/auctions/",
+      "permanent": true
+    },
+    {
+      "source": "/past-auctions/",
+      "destination": "/auctions/",
+      "permanent": true
+    },
+    {
+      "source": "/sold-properties",
+      "destination": "/auctions/",
+      "permanent": true
+    },
+    {
+      "source": "/sold-properties/",
+      "destination": "/auctions/",
+      "permanent": true
+    },
+    {
+      "source": "/updates",
+      "destination": "/auctions/",
+      "permanent": true
+    },
+    {
+      "source": "/updates/",
+      "destination": "/auctions/",
+      "permanent": true
+    },
+    {
+      "source": "/auctions/residential-real-estate-auction",
+      "destination": "/auctions/2392-se-fruit-ave/",
+      "permanent": true
+    },
+    {
+      "source": "/auctions/residential-real-estate-auction/",
+      "destination": "/auctions/2392-se-fruit-ave/",
+      "permanent": true
+    },
+    {
+      "source": "/auctions/56-9-acres-development-property",
+      "destination": "/auctions/angle-road-development-property/",
+      "permanent": true
+    },
+    {
+      "source": "/auctions/56-9-acres-development-property/",
+      "destination": "/auctions/angle-road-development-property/",
+      "permanent": true
+    },
+    {
+      "source": "/auctions/commercial-real-estate-auction",
+      "destination": "/auctions/st-lucie-west-commercial-lots/",
+      "permanent": true
+    },
+    {
+      "source": "/auctions/commercial-real-estate-auction/",
+      "destination": "/auctions/st-lucie-west-commercial-lots/",
+      "permanent": true
+    },
+    {
+      "source": "/auctions/new-property",
+      "destination": "/auctions/",
+      "permanent": true
+    },
+    {
+      "source": "/auctions/new-property/",
+      "destination": "/auctions/",
+      "permanent": true
+    },
+    {
+      "source": "/auctions/new-property-2",
+      "destination": "/auctions/",
+      "permanent": true
+    },
+    {
+      "source": "/auctions/new-property-2/",
+      "destination": "/auctions/",
+      "permanent": true
+    },
+    {
+      "source": "/south-florida-real-estate-auctions-associate-auctions",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/south-florida-real-estate-auctions-associate-auctions/",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/advantages",
+      "destination": "/sell/",
+      "permanent": true
+    },
+    {
+      "source": "/advantages/",
+      "destination": "/sell/",
+      "permanent": true
+    },
+    {
+      "source": "/sellers-guide",
+      "destination": "/sell/",
+      "permanent": true
+    },
+    {
+      "source": "/sellers-guide/",
+      "destination": "/sell/",
+      "permanent": true
+    },
+    {
+      "source": "/process",
+      "destination": "/sell/",
+      "permanent": true
+    },
+    {
+      "source": "/process/",
+      "destination": "/sell/",
+      "permanent": true
+    },
+    {
+      "source": "/buyers-guide",
+      "destination": "/buy/",
+      "permanent": true
+    },
+    {
+      "source": "/buyers-guide/",
+      "destination": "/buy/",
+      "permanent": true
+    },
+    {
+      "source": "/buyers",
+      "destination": "/buy/",
+      "permanent": true
+    },
+    {
+      "source": "/buyers/",
+      "destination": "/buy/",
+      "permanent": true
+    },
+    {
+      "source": "/press",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/press/",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/faq",
+      "destination": "/sell/",
+      "permanent": true
+    },
+    {
+      "source": "/faq/",
+      "destination": "/sell/",
+      "permanent": true
+    }
+  ]
+}
