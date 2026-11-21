@@ -1,9 +1,6 @@
 ---
-import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
-import kc from '../../assets/kc-daniel.jpg';
-import { auctioneers, counties, specialties } from '../../data/directory';
-const photos: Record<string, ImageMetadata> = { 'kc-daniel': kc };
+import { auctioneers, counties, specialties, initials } from '../../data/directory';
 ---
 <Layout title="Florida Auctioneer Directory | Auction Station" description="Find licensed Florida auctioneers by specialty and county. Every listing shows license numbers you can verify with DBPR.">
   <section class="section--tight dark">
@@ -29,7 +26,7 @@ const photos: Record<string, ImageMetadata> = { 'kc-daniel': kc };
       <ul class="stack" id="results" style="gap: 14px;">
         {auctioneers.map((a) => (
           <li class="card listing" data-search={`${a.name} ${a.business} ${a.city} ${a.county}`.toLowerCase()} data-spec={a.specialties.join('|')} data-county={a.county} data-backup={String(a.backup)}>
-            <Image src={photos[a.slug]} alt={a.name} width={192} height={192} />
+            <span class="monogram" aria-hidden="true">{initials(a.name)}</span>
             <div class="stack" style="gap: 8px;">
               <h2 class="h3"><a href={`/directory/${a.slug}/`} style="text-decoration: none;">{a.name}</a> <span class="muted" style="font-family: var(--sans); font-size: 16px; font-weight: 600;">· {a.business}</span></h2>
               <p class="muted">{a.city}, {a.county} County, {a.state} · {a.licenses.map((l) => l.number).join(' · ')}</p>
