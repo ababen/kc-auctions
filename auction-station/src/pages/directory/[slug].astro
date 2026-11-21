@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets';
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import kc from '../../assets/kc-daniel.jpg';
+import faa from '../../assets/faa-logo.png';
+import { auctioneers, type Auctioneer } from '../../data/directory';
+import { site } from '../../data/site';
+
+export const getStaticPaths = (() => auctioneers.map((a) => ({ params: { slug: a.slug }, props: { a } }))) satisfies GetStaticPaths;
+interface Props { a: Auctioneer }
+const { a } = Astro.props;
+const photos: Record<string, ImageMetadata> = { 'kc-daniel': kc };
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: a.name,
+  jobTitle: 'Auctioneer',
+  worksFor: { '@type': 'Organization', name: a.business, url: a.website },
+  telephone: a.phone,
+  email: a.email,
+  address: { '@type': 'PostalAddress', addressLocality: a.city, addressRegion: a.state },
+  award: a.honors,
+};
+---
+<Layout title={`${a.name}, Auctioneer in ${a.city}, ${a.state} | Auction Station`} description={`${a.name} of ${a.business}: licensed Florida auctioneer (${a.licenses[0].number}) in ${a.city}. ${a.specialties.slice(0, 3).join(', ')}.`} jsonLd={jsonLd}>
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/directory/">Directory</a><span aria-hidden="true">/</span><span aria-current="page">{a.name}</span></nav>
+    <div class="profile" style="padding-bottom: 72px;">
+      <div class="stack">
+        <Image class="profile-photo" src={photos[a.slug]} alt={a.name} width={600} height={600} loading="eager" />
+        <a class="btn btn--orange btn--lg btn--block" href={a.phoneHref}>Call {a.phone}</a>
+        <a class="btn btn--navy btn--block" href={`mailto:${a.email}`}>Email {a.name.split(' ')[0]}</a>
+        {a.website && <a class="btn btn--ghost btn--block" href={a.website} target="_blank" rel="noopener">Visit {a.business} ↗</a>}
+      </div>
+      <div class="stack" style="gap: 24px;">
+        <div class="stack" style="gap: 10px;">
+          <div class="tags">{a.backup && <span class="tag tag--green">Available as backup auctioneer</span>}<span class="tag">Listing checked {a.verified}</span></div>
+          <h1 class="h1" style="font-size: clamp(40px, 5vw, 64px);">{a.name}</h1>
+          <p class="lead" style="font-weight: 600;">{a.business} · {a.city}, {a.state}</p>
+        </div>
+        <p class="lead">{a.bio}</p>
+        {a.honors.length > 0 && (
+          <div class="card" style="flex-direction: row; align-items: center; gap: 16px;">
+            <Image src={faa} alt="Florida Auctioneers Association logo" width={120} style="width: 64px; height: auto;" />
+            <ul>{a.honors.map((h) => <li style="font-weight: 700;">{h}</li>)}</ul>
+          </div>
+        )}
+        <dl class="facts">
+          {a.licenses.map((l) => <div><dt>{l.label}</dt><dd>{l.number}</dd></div>)}
+          <div><dt>Specialties</dt><dd>{a.specialties.join(', ')}</dd></div>
+          <div><dt>Service area</dt><dd>{a.serviceArea}</dd></div>
+          <div><dt>County</dt><dd>{a.county} County, {a.state}</dd></div>
+        </dl>
+        <p class="muted" style="font-size: 14px;">Check any Florida license on the <a href={site.dbprSearch} target="_blank" rel="noopener">DBPR license search</a>.</p>
+      </div>
+    </div>
+  </div>
+</Layout>

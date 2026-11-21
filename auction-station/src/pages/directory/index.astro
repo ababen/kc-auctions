@@ -1,0 +1,79 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import kc from '../../assets/kc-daniel.jpg';
+import { auctioneers, counties, specialties } from '../../data/directory';
+const photos: Record<string, ImageMetadata> = { 'kc-daniel': kc };
+---
+<Layout title="Florida Auctioneer Directory | Auction Station" description="Find licensed Florida auctioneers by specialty and county. Every listing shows license numbers you can verify with DBPR.">
+  <section class="section--tight dark">
+    <div class="container stack">
+      <p class="eyebrow">Auctioneer directory</p>
+      <h1 class="h1" style="font-size: clamp(40px, 5.5vw, 72px);">Find a licensed auctioneer</h1>
+      <p class="lead">Search by specialty or county. Every listing shows its Florida license numbers, checked before it goes live.</p>
+    </div>
+  </section>
+  <section class="section--tight">
+    <div class="container">
+      <form class="filters" id="filters" role="search" onsubmit="return false">
+        <label class="field">Search <input type="search" id="q" placeholder="Name, business or city" /></label>
+        <label class="field">Specialty
+          <select id="spec"><option value="">All specialties</option>{specialties.map((s) => <option>{s}</option>)}</select>
+        </label>
+        <label class="field">County
+          <select id="county"><option value="">All counties</option>{counties.map((c) => <option>{c}</option>)}</select>
+        </label>
+        <label class="check"><input type="checkbox" id="backup" /> Backup available</label>
+      </form>
+      <p class="muted" id="count" aria-live="polite" style="margin-bottom: 14px;">{auctioneers.length} auctioneer{auctioneers.length === 1 ? '' : 's'}</p>
+      <ul class="stack" id="results" style="gap: 14px;">
+        {auctioneers.map((a) => (
+          <li class="card listing" data-search={`${a.name} ${a.business} ${a.city} ${a.county}`.toLowerCase()} data-spec={a.specialties.join('|')} data-county={a.county} data-backup={String(a.backup)}>
+            <Image src={photos[a.slug]} alt={a.name} width={192} height={192} />
+            <div class="stack" style="gap: 8px;">
+              <h2 class="h3"><a href={`/directory/${a.slug}/`} style="text-decoration: none;">{a.name}</a> <span class="muted" style="font-family: var(--sans); font-size: 16px; font-weight: 600;">· {a.business}</span></h2>
+              <p class="muted">{a.city}, {a.county} County, {a.state} · {a.licenses.map((l) => l.number).join(' · ')}</p>
+              <div class="tags">
+                {a.backup && <span class="tag tag--green">Backup available</span>}
+                {a.specialties.map((s) => <span class="tag">{s}</span>)}
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn btn--navy" href={`/directory/${a.slug}/`}>View profile</a>
+              <a class="btn btn--ghost" href={a.phoneHref}>{a.phone}</a>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div class="empty hidden" id="empty">
+        <h2 class="h3">No auctioneers match yet</h2>
+        <p class="muted" style="margin: 8px 0 16px;">The directory is growing. Need someone now? We can find a licensed backup for you.</p>
+        <a class="btn btn--orange" href="/backup-auctioneer/">Request an auctioneer</a>
+      </div>
+      <div class="card" style="margin-top: 32px; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+        <div><h2 class="h3">Are you a licensed auctioneer?</h2><p class="muted">Listings are free. Add yours and join the backup roster.</p></div>
+        <a class="btn btn--orange" href="/get-listed/">Get listed</a>
+      </div>
+    </div>
+  </section>
+  <script>
+    const $ = (id: string) => document.getElementById(id) as HTMLInputElement;
+    const items = [...document.querySelectorAll<HTMLElement>('#results > li')];
+    function apply() {
+      const q = $('q').value.trim().toLowerCase();
+      const spec = $('spec').value, county = $('county').value, backup = $('backup').checked;
+      let shown = 0;
+      for (const el of items) {
+        const ok = (!q || el.dataset.search!.includes(q))
+          && (!spec || el.dataset.spec!.split('|').includes(spec))
+          && (!county || el.dataset.county === county)
+          && (!backup || el.dataset.backup === 'true');
+        el.hidden = !ok;
+        if (ok) shown++;
+      }
+      $('count').textContent = `${shown} auctioneer${shown === 1 ? '' : 's'}`;
+      document.getElementById('empty')!.classList.toggle('hidden', shown > 0);
+    }
+    document.getElementById('filters')!.addEventListener('input', apply);
+  </script>
+</Layout>

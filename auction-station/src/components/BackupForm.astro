@@ -1,0 +1,28 @@
+---
+import { site } from '../data/site';
+const roles = ['Standby backup', 'Lead auctioneer', 'Second bid caller', 'Ringman', 'Benefit / gala auctioneer'];
+---
+<form action={`https://formsubmit.co/${site.email}`} method="POST" class="stack" style="gap: 16px;">
+  <input type="hidden" name="_subject" value="Backup auctioneer request — Auction Station" />
+  <input type="hidden" name="_template" value="table" />
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_next" value="" />
+  <p class="hidden"><label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off" /></label></p>
+  <div class="form-row">
+    <label class="field">Name <input type="text" name="name" autocomplete="name" required /></label>
+    <label class="field">Phone <input type="tel" name="phone" autocomplete="tel" required /></label>
+  </div>
+  <label class="field">Email <input type="email" name="email" autocomplete="email" required /></label>
+  <div class="form-row">
+    <label class="field">Auction date <input type="date" name="date" /></label>
+    <label class="field">City / venue <input type="text" name="location" /></label>
+  </div>
+  <fieldset>
+    <legend>What do you need?</legend>
+    <div class="chips">
+      {roles.map((r, n) => <label class="chip"><input type="checkbox" name="role" value={r} checked={n === 0} /><span>{r}</span></label>)}
+    </div>
+  </fieldset>
+  <label class="field">Tell us about the sale <textarea name="message" rows="3" placeholder="Type of auction, number of lots, start time…"></textarea></label>
+  <button class="btn btn--orange btn--lg btn--block" type="submit">Request a backup auctioneer</button>
+</form>

@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+---
+<Layout title="Thanks | Auction Station" description="We got your message.">
+  <section class="section"><div class="container stack" style="align-items: flex-start;">
+    <p class="eyebrow">Message sent</p>
+    <h1 class="h2">Thanks, we’ll be in touch soon.</h1>
+    <p class="lead">Need an answer right now? Call <a href={site.phoneHref}>{site.phone}</a>.</p>
+    <a class="btn btn--navy" href="/">Back to Auction Station</a>
+  </div></section>
+</Layout>

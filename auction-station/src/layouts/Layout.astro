@@ -1,0 +1,106 @@
+---
+import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
+import Logo from '../components/Logo.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  jsonLd?: Record<string, unknown>;
+}
+const { title, description, jsonLd } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/directory/', label: 'Auctioneer Directory' },
+  { href: '/backup-auctioneer/', label: 'Backup Auctioneer' },
+  { href: '/guides/', label: 'Auction Guides' },
+  { href: '/get-listed/', label: 'Get Listed' },
+];
+const org = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: site.url,
+  telephone: '+1-772-732-0289',
+  email: site.email,
+  founder: { '@type': 'Person', name: site.operator },
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="theme-color" content="#14213d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700;62..125,800;62..125,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(org)} />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <Analytics />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="topbar">
+      <div class="container">
+        <span>Need an auctioneer on short notice? <a href="/backup-auctioneer/"><u>Book a backup</u></a></span>
+        <a class="hide-sm" href={site.phoneHref}>{site.phone}</a>
+      </div>
+    </div>
+    <header class="header">
+      <div class="container" style="position: relative;">
+        <Logo />
+        <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+        <nav id="nav" class="nav" aria-label="Main">
+          {nav.map((n) => <a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined}>{n.label}</a>)}
+        </nav>
+      </div>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="footer">
+      <div class="container">
+        <div class="cols">
+          <div class="stack" style="gap: 12px;">
+            <Logo />
+            <p style="max-width: 44ch;">All things auctions: find a licensed auctioneer, book a backup for auction day and learn how auctions work.</p>
+          </div>
+          <div>
+            <h3>Explore</h3>
+            {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+          </div>
+          <div>
+            <h3>Contact</h3>
+            <a href={site.phoneHref}>{site.phone}</a>
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+            <span style="display: block; padding: 4px 0;">{site.city}, {site.state}</span>
+          </div>
+        </div>
+        <div class="legal">
+          <span>© {new Date().getFullYear()} {site.name}. Operated by {site.operator}, {site.operatorTitle} {site.auctioneerLicense}.</span>
+          <span>Directory listings are provided by each auctioneer. Verify any Florida license at <a href={site.dbprSearch} style="display: inline; text-decoration: underline;" rel="noopener" target="_blank">myfloridalicense.com</a>.</span>
+        </div>
+      </div>
+    </footer>
+    <script>
+      const btn = document.querySelector('.menu-btn');
+      const nav = document.getElementById('nav');
+      btn?.addEventListener('click', () => {
+        const open = nav?.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(!!open));
+      });
+      document.querySelectorAll<HTMLInputElement>('input[name="_next"]').forEach((i) => { i.value = location.origin + '/thanks/'; });
+    </script>
+  </body>
+</html>

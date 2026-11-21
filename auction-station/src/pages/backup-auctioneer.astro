@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BackupForm from '../components/BackupForm.astro';
+import { site } from '../data/site';
+const uses = [
+  { t: 'Standby backup', b: 'We hold your date. If your auctioneer can’t make it, a licensed backup steps onto the block with your catalog and terms.' },
+  { t: 'Second bid caller', b: 'Long sales wear voices out. Trade off with a second auctioneer to keep the pace and the energy up.' },
+  { t: 'Ringman', b: 'An extra set of eyes in the crowd to spot bids, work the room and keep bidders engaged.' },
+  { t: 'Benefit & gala auctioneer', b: 'A charity auctioneer for your live auction and paddle raise, with a backup already lined up.' },
+];
+const faqs = [
+  { q: 'Who is the backup auctioneer?', a: `Backups come from licensed auctioneers on the Auction Station roster, starting with ${site.operator} (Florida ${site.auctioneerLicense}). You get the name and license number in writing before your sale.` },
+  { q: 'How far ahead should I book?', a: 'As early as you set your sale date. Short-notice requests are welcome too: call and we will tell you straight away whether we can cover it.' },
+  { q: 'What does it cost?', a: 'Standby and on-the-block work are quoted as a day rate based on the type and length of the sale and travel. You get the quote in writing.' },
+  { q: 'Where do you work?', a: 'Based in Stuart on Florida’s Treasure Coast, covering South Florida and travelling statewide.' },
+];
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+---
+<Layout title="Backup Auctioneer in Florida | Auction Station" description="Book a licensed backup auctioneer for auction day: standby cover, second bid caller, ringman or benefit auctioneer. Treasure Coast and South Florida." jsonLd={faqLd}>
+  <section class="hero dark">
+    <div class="container stack">
+      <p class="eyebrow">Backup auctioneer</p>
+      <h1 class="h1" style="font-size: clamp(42px, 6vw, 80px);">Your sale goes ahead. <br /><em>No matter what.</em></h1>
+      <p class="lead">A licensed auctioneer on standby for your date, or alongside you on the block. For auction companies, estate sales, real estate auctions and charity galas.</p>
+      <div class="btn-row"><a class="btn btn--orange btn--lg" href="#request">Request a backup</a><a class="btn btn--ghost btn--lg" href={site.phoneHref}>Call {site.phone}</a></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Ways we help</p>
+      <h2 class="h2" style="margin-bottom: 28px;">Cover for every kind of sale</h2>
+      <div class="grid-2">
+        {uses.map((u) => <div class="card pillar"><h3 class="h3">{u.t}</h3><p class="muted">{u.b}</p></div>)}
+      </div>
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="container grid-2" style="gap: 48px;">
+      <div class="stack">
+        <p class="eyebrow">How it works</p>
+        <h2 class="h2">Three steps to a safe sale day</h2>
+        <ol class="steps" style="margin-top: 12px;">
+          <li><div><h3 class="h3" style="font-size: 20px;">Send the details</h3><p class="muted">Date, venue, start time and what you’re selling.</p></div></li>
+          <li><div><h3 class="h3" style="font-size: 20px;">Get a written confirmation</h3><p class="muted">The backup’s name, license number and day rate.</p></div></li>
+          <li><div><h3 class="h3" style="font-size: 20px;">Share the run of show</h3><p class="muted">Terms, catalog and order of sale, so your backup is ready to step in.</p></div></li>
+        </ol>
+      </div>
+      <div class="stack">
+        <p class="eyebrow">Questions</p>
+        {faqs.map((f) => <details class="card" style="gap: 8px;"><summary style="font-weight: 800; cursor: pointer;">{f.q}</summary><p class="muted">{f.a}</p></details>)}
+      </div>
+    </div>
+  </section>
+  <section class="section" id="request">
+    <div class="container">
+      <div class="form-box dark">
+        <div class="stack">
+          <h2 class="h2">Request a backup auctioneer</h2>
+          <p class="lead">Tell us about your sale and we’ll confirm availability, usually the same day.</p>
+          <a href={site.phoneHref} style="font-weight: 800; font-size: 24px; text-decoration: none;">{site.phone}</a>
+          <a href={`mailto:${site.email}`} style="color: var(--orange);">{site.email}</a>
+        </div>
+        <div class="form-card"><BackupForm /></div>
+      </div>
+    </div>
+  </section>
+</Layout>
