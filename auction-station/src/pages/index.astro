@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import podium from '../assets/auctioneer-podium.jpg';
 import { guides } from '../data/guides';
 import { auctioneers } from '../data/directory';
 import { site } from '../data/site';
@@ -10,7 +12,8 @@ const pillars = [
 ];
 ---
 <Layout title="Auction Station | All things auctions: auctioneer directory & backup auctioneers" description="Find a licensed auctioneer, book a backup auctioneer for auction day, and learn how auctions work. Based in Stuart, Florida.">
-  <section class="hero dark">
+  <section class="hero hero--photo dark">
+    <Image class="hero-bg" src={podium} alt="An auctioneer at a wooden podium calls bids, gavel in hand, as bidders raise numbered paddles" widths={[640, 960, 1376]} sizes="100vw" loading="eager" fetchpriority="high" />
     <div class="container">
       <p class="eyebrow">{site.tagline}</p>
       <h1 class="h1" style="margin-top: 14px;">Every auction needs <br />an auctioneer. <em>And a backup.</em></h1>
