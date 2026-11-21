@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { guides } from '../data/guides';
+import { auctioneers } from '../data/directory';
+import { site } from '../data/site';
+const pillars = [
+  { n: '01', title: 'Auctioneer Directory', body: 'Find licensed auctioneers by specialty and county, with license numbers you can check.', href: '/directory/', cta: 'Browse the directory' },
+  { n: '02', title: 'Backup Auctioneer', body: 'A licensed auctioneer on standby for your sale date, or a second bid caller for big events.', href: '/backup-auctioneer/', cta: 'Book a backup' },
+  { n: '03', title: 'Auction Guides', body: 'Plain-English guides to auction types, buyer’s premiums, hiring an auctioneer and benefit auctions.', href: '/guides/', cta: 'Read the guides' },
+];
+---
+<Layout title="Auction Station | All things auctions: auctioneer directory & backup auctioneers" description="Find a licensed auctioneer, book a backup auctioneer for auction day, and learn how auctions work. Based in Stuart, Florida.">
+  <section class="hero dark">
+    <div class="container">
+      <p class="eyebrow">{site.tagline}</p>
+      <h1 class="h1" style="margin-top: 14px;">Every auction needs <br />an auctioneer. <em>And a backup.</em></h1>
+      <p class="lead">Auction Station is the place to find a licensed auctioneer, line up a backup for auction day and learn how auctions really work.</p>
+      <div class="btn-row">
+        <a class="btn btn--orange btn--lg" href="/directory/">Find an auctioneer</a>
+        <a class="btn btn--ghost btn--lg" href="/backup-auctioneer/">Book a backup auctioneer</a>
+      </div>
+      <div class="ticker" aria-label="Auction types we cover">
+        <span>Real estate</span><span>Benefit &amp; charity</span><span>Estates</span><span>Commercial &amp; equipment</span><span>Vehicles</span><span>Bid calling</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-3">
+        {pillars.map((p) => (
+          <a class="card pillar" href={p.href}>
+            <span class="num">{p.n}</span>
+            <h2 class="h3">{p.title}</h2>
+            <p class="muted">{p.body}</p>
+            <span class="more">{p.cta} →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="container grid-2" style="align-items: center; gap: 48px;">
+      <div class="stack">
+        <p class="eyebrow">Backup auctioneer</p>
+        <h2 class="h2">Sale day is set. Your auctioneer is sick.</h2>
+        <p class="lead">Auction dates are marketed for weeks, so they can’t move. Auction Station keeps a licensed auctioneer ready to step in, or to work alongside you as a second bid caller or ringman.</p>
+        <div class="btn-row"><a class="btn btn--orange btn--lg" href="/backup-auctioneer/">How it works</a><a class="btn btn--ghost btn--lg" href={site.phoneHref}>Call {site.phone}</a></div>
+      </div>
+      <ol class="steps">
+        <li><div><h3 class="h3" style="font-size: 20px;">Tell us the date</h3><p style="color: var(--on-dark);">Share the sale, venue and start time.</p></div></li>
+        <li><div><h3 class="h3" style="font-size: 20px;">We confirm a licensed backup</h3><p style="color: var(--on-dark);">License details and a day rate, in writing.</p></div></li>
+        <li><div><h3 class="h3" style="font-size: 20px;">Your sale goes ahead</h3><p style="color: var(--on-dark);">On standby, or on the block when you need it.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 28px;">
+        <div><p class="eyebrow">Auction guides</p><h2 class="h2">Learn how auctions work</h2></div>
+        <a class="btn btn--navy" href="/guides/">All guides</a>
+      </div>
+      <div class="grid-3">
+        {guides.slice(0, 3).map((g) => (
+          <a class="card" href={`/guides/${g.slug}/`}>
+            <span class="tag">{g.audience}</span>
+            <h3 class="h3" style="font-size: 22px;">{g.title}</h3>
+            <p class="muted">{g.summary}</p>
+            <span class="more">Read →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container grid-2" style="align-items: center; gap: 40px;">
+      <div class="stack">
+        <p class="eyebrow">For auctioneers</p>
+        <h2 class="h2">Get listed in the directory</h2>
+        <p class="lead">Licensed auctioneers can add a free listing and join the backup roster. We check every license before it goes live.</p>
+        <div class="btn-row"><a class="btn btn--navy btn--lg" href="/get-listed/">Add your listing</a></div>
+      </div>
+      <div class="card">
+        <p class="eyebrow">In the directory now</p>
+        <ul class="stack" style="gap: 10px;">
+          {auctioneers.map((a) => <li><a href={`/directory/${a.slug}/`} style="font-weight: 800; font-size: 18px;">{a.name}</a><span class="muted"> · {a.business}, {a.city}</span></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>

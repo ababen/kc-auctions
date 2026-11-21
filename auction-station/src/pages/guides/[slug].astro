@@ -1,0 +1,33 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import { guides, type Guide } from '../../data/guides';
+import { site } from '../../data/site';
+export const getStaticPaths = (() => guides.map((g) => ({ params: { slug: g.slug }, props: { g } }))) satisfies GetStaticPaths;
+interface Props { g: Guide }
+const { g } = Astro.props;
+const others = guides.filter((x) => x.slug !== g.slug).slice(0, 3);
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: g.title, description: g.summary, author: { '@type': 'Person', name: site.operator }, publisher: { '@type': 'Organization', name: site.name } };
+---
+<Layout title={`${g.title} | Auction Station`} description={g.summary} jsonLd={jsonLd}>
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/guides/">Guides</a><span aria-hidden="true">/</span><span aria-current="page">{g.title}</span></nav>
+    <article class="article" style="padding-bottom: 64px;">
+      <span class="tag">{g.audience}</span>
+      <h1 class="h1" style="font-size: clamp(38px, 5vw, 60px); margin-top: 14px;">{g.title}</h1>
+      <p class="lead" style="margin-top: 16px; font-size: 20px;">{g.summary}</p>
+      {g.sections.map((s) => (<><h2>{s.heading}</h2>{s.body.map((p) => <p>{p}</p>)}</>))}
+      <div class="card" style="margin-top: 48px;">
+        <h2 class="h3" style="margin: 0;">Need an auctioneer?</h2>
+        <p class="muted">Find one in the directory, or book a licensed backup for your sale date.</p>
+        <div class="btn-row"><a class="btn btn--navy" href="/directory/">Browse the directory</a><a class="btn btn--orange" href="/backup-auctioneer/">Book a backup</a></div>
+      </div>
+    </article>
+  </div>
+  <section class="section--tight alt">
+    <div class="container">
+      <h2 class="h3" style="margin-bottom: 18px;">More guides</h2>
+      <div class="grid-3">{others.map((o) => <a class="card" href={`/guides/${o.slug}/`}><h3 class="h3" style="font-size: 20px;">{o.title}</h3><span class="more">Read →</span></a>)}</div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { specialties } from '../data/directory';
+import { site } from '../data/site';
+---
+<Layout title="Get Listed in the Auctioneer Directory | Auction Station" description="Licensed auctioneers can add a free listing to the Auction Station directory and join the backup auctioneer roster.">
+  <section class="section">
+    <div class="container">
+      <div class="form-box dark">
+        <div class="stack">
+          <p class="eyebrow">For auctioneers</p>
+          <h1 class="h2">Add your free listing</h1>
+          <p class="lead">Listings are free for licensed auctioneers. We check your license with DBPR before it goes live, and you can join the backup roster to pick up standby and bid-calling work.</p>
+          <ul class="ticks" style="color: var(--on-dark);">
+            <li>Profile page with your specialties and service area</li>
+            <li>License numbers shown so clients can trust you</li>
+            <li>Optional: backup roster for standby and ringman work</li>
+          </ul>
+        </div>
+        <div class="form-card">
+          <form action={`https://formsubmit.co/${site.email}`} method="POST" class="stack" style="gap: 16px;">
+            <input type="hidden" name="_subject" value="New directory listing request — Auction Station" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="" />
+            <p class="hidden"><label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off" /></label></p>
+            <div class="form-row">
+              <label class="field">Your name <input type="text" name="name" autocomplete="name" required /></label>
+              <label class="field">Business name <input type="text" name="business" autocomplete="organization" /></label>
+            </div>
+            <div class="form-row">
+              <label class="field">Auctioneer license # <input type="text" name="license" placeholder="AU…" required /></label>
+              <label class="field">Business license # <input type="text" name="business_license" placeholder="AB…" /></label>
+            </div>
+            <div class="form-row">
+              <label class="field">Phone <input type="tel" name="phone" autocomplete="tel" required /></label>
+              <label class="field">Email <input type="email" name="email" autocomplete="email" required /></label>
+            </div>
+            <div class="form-row">
+              <label class="field">City <input type="text" name="city" autocomplete="address-level2" /></label>
+              <label class="field">Website <input type="url" name="website" autocomplete="url" /></label>
+            </div>
+            <fieldset>
+              <legend>Specialties</legend>
+              <div class="chips">{specialties.map((s) => <label class="chip"><input type="checkbox" name="specialties" value={s} /><span>{s}</span></label>)}</div>
+            </fieldset>
+            <label class="check"><input type="checkbox" name="backup_roster" value="yes" /> Add me to the backup auctioneer roster</label>
+            <button class="btn btn--orange btn--lg btn--block" type="submit">Submit my listing</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
