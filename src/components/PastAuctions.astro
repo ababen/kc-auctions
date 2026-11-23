@@ -3,8 +3,10 @@ import AuctionCard from './AuctionCard.astro';
 import Icon from './Icon.astro';
 import { pastAuctions, otherPastAuctions } from '../data/auctions';
 
-interface Props { heading?: 'h1' | 'h2' }
-const { heading = 'h2' } = Astro.props;
+interface Props { heading?: 'h1' | 'h2'; limit?: number; filters?: boolean }
+const { heading = 'h2', limit, filters = false } = Astro.props;
+const shown = limit ? pastAuctions.slice(0, limit) : pastAuctions;
+const categories = [...new Set(pastAuctions.map((a) => a.category))];
 const H = heading;
 ---
 <section id="past" class="dark section">
@@ -21,9 +23,20 @@ const H = heading;
         <div class="stat"><strong>2010</strong><span>Florida bid-calling champion</span></div>
       </div>
     </div>
-    <div class="grid-cards">
-      {pastAuctions.map((a, i) => <AuctionCard auction={a} delay={i * 0.12} />)}
+    {filters && (
+      <div class="filter-chips" role="group" aria-label="Filter past auctions">
+        <button type="button" class="fchip" aria-pressed="true" data-filter="">All ({pastAuctions.length})</button>
+        {categories.map((c) => <button type="button" class="fchip" aria-pressed="false" data-filter={c}>{c} ({pastAuctions.filter((a) => a.category === c).length})</button>)}
+      </div>
+    )}
+    <div class="grid-cards" id="past-grid">
+      {shown.map((a, i) => <AuctionCard auction={a} delay={Math.min(i, 5) * 0.12} />)}
     </div>
+    {limit && pastAuctions.length > limit && (
+      <div style="display: flex; justify-content: center; margin-top: 32px;">
+        <a class="btn btn--gold btn--lg" href="/auctions/#past">See all {pastAuctions.length} past auctions</a>
+      </div>
+    )}
     <ul class="mini-list">
       {otherPastAuctions.map((m) => (
         <li class="mini">
@@ -38,3 +51,14 @@ const H = heading;
     </ul>
   </div>
 </section>
+{filters && (
+  <script>
+    const chips = document.querySelectorAll<HTMLButtonElement>('.fchip');
+    const cards = document.querySelectorAll<HTMLElement>('#past-grid .auction-card');
+    chips.forEach((chip) => chip.addEventListener('click', () => {
+      const f = chip.dataset.filter;
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      cards.forEach((card) => { card.hidden = !!f && card.dataset.cat !== f; });
+    }));
+  </script>
+)}
