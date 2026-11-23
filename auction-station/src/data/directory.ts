@@ -54,3 +54,5 @@ export const auctioneers: Auctioneer[] = [
 ];
 
 export const counties = [...new Set(auctioneers.map((a) => a.county))].sort();
+
+export const initials = (name: string) => name.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();

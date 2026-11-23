@@ -12,7 +12,7 @@ interface Props {
 const { title, description, jsonLd } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const path = Astro.url.pathname;
-const ogImage = new URL('/og-image.png', Astro.site).toString();
+const ogImage = new URL('/og-image.jpg', Astro.site).toString();
 const ogAlt = 'Auction Station: every auction needs an auctioneer, and a backup.';
 const nav = [
   { href: '/directory/', label: 'Auctioneer Directory' },

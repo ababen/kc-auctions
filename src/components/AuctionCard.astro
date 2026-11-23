@@ -6,9 +6,9 @@ interface Props { auction: Auction; delay?: number }
 const { auction, delay = 0 } = Astro.props;
 const photo = auction.photos[0];
 ---
-<a class="auction-card" href={`/auctions/${auction.slug}/`}>
+<a class="auction-card" href={`/auctions/${auction.slug}/`} data-cat={auction.category}>
   <div class="photo">
-    <Image src={photo.src} alt={photo.alt} widths={[400, 640, 900]} sizes="(max-width: 700px) 100vw, 400px" />
+    <Image src={photo.src} alt={photo.alt} widths={[400, 640, 900]} sizes="(max-width: 700px) 100vw, 400px" style={photo.position ? `object-position: ${photo.position}` : undefined} />
     {auction.status === 'completed' && <span class="stamp" style={`animation-delay:${delay}s`}>AUCTIONED</span>}
   </div>
   <div class="body">

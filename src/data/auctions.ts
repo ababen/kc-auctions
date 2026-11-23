@@ -7,13 +7,14 @@ import us1Flyer from '../assets/us1-flyer.jpg';
 import lbvHomes from '../assets/la-buona-vita-homes.jpg';
 import lbvHome from '../assets/la-buona-vita-home.jpg';
 import montereyCondo from '../assets/monterey-condo.jpg';
+import { flyerAuctions } from './flyer-auctions';
 
-export type Photo = { src: ImageMetadata; alt: string };
+export type Photo = { src: ImageMetadata; alt: string; position?: string };
 
 export type Auction = {
   slug: string;
   status: 'upcoming' | 'completed';
-  category: 'Residential estate' | 'Residential' | 'Condo' | 'Development land' | 'Commercial';
+  category: 'Residential estate' | 'Residential' | 'Condo' | 'Development land' | 'Commercial' | 'Vehicles & equipment' | 'Personal property';
   format: string;
   title: string;
   shortTitle: string;
@@ -49,7 +50,7 @@ const lbvTerms = [
   'Auction conducted in the community clubhouse, rain or shine',
 ];
 
-export const auctions: Auction[] = [
+const featuredAuctions: Auction[] = [
   {
     // Slug kept identical to the old WordPress URL so existing rankings carry over.
     slug: 'real-estate-auction-2-1-riverside-condo-at-monterey-yacht-country-club',
@@ -289,7 +290,7 @@ export const auctions: Auction[] = [
       'Owner’s title insurance provided by seller; all other closing costs paid by buyer',
       'Current-year property taxes prorated to the day of auction',
     ],
-    documents: [registrationForm],
+    documents: [registrationForm, { name: 'Original auction flyer', url: '/flyers/st-lucie-west-commercial-lots.pdf' }],
     address: '1900 SW Fountainview Blvd, Port St. Lucie, FL',
     summary: [
       { label: 'To qualify', value: '$50,000' },
@@ -357,6 +358,8 @@ export const auctions: Auction[] = [
     ],
   },
 ];
+
+export const auctions: Auction[] = [...featuredAuctions, ...flyerAuctions];
 
 /** Smaller past auctions with no detail page or photos (yet). */
 export const otherPastAuctions = [

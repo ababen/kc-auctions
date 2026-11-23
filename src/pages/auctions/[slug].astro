@@ -15,7 +15,11 @@ export const getStaticPaths = (() =>
 interface Props { auction: Auction }
 const { auction } = Astro.props;
 const [hero, ...rest] = auction.photos;
-const others = auctions.filter((a) => a.slug !== auction.slug);
+const others = auctions
+  .filter((a) => a.slug !== auction.slug)
+  .sort((a, b) => Number(b.category === auction.category) - Number(a.category === auction.category))
+  .slice(0, 6);
+const iconFor = (c: Auction['category']) => (c === 'Development land' ? 'land' : c === 'Vehicles & equipment' ? 'truck' : 'pin');
 const og = await getImage({ src: hero.src, width: 1200, format: 'jpg' });
 const completed = auction.status === 'completed';
 
@@ -135,11 +139,11 @@ const jsonLd = {
 
   <section class="section--tight" style="background: var(--paper-2);">
     <div class="container">
-      <h2 class="h2" style="font-size: 30px; margin-bottom: 20px;">More past auctions</h2>
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px; margin-bottom: 20px;"><h2 class="h2" style="font-size: 30px;">More past auctions</h2><a href="/auctions/#past" style="font-weight: 700;">See all {auctions.length - 1} →</a></div>
       <div class="docs">
         {others.map((o) => (
           <a class="doc" href={`/auctions/${o.slug}/`}>
-            <span class="ic"><Icon name={o.category === 'Development land' ? 'land' : 'pin'} size={20} /></span>
+            <span class="ic"><Icon name={iconFor(o.category)} size={20} /></span>
             <span><b>{o.title}</b><small>{o.category} · {o.city}</small></span>
           </a>
         ))}
