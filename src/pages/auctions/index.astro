@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import AlertsForm from '../../components/AlertsForm.astro';
+import BidderHero from '../../components/BidderHero.astro';
 import AuctionCard from '../../components/AuctionCard.astro';
 import PastAuctions from '../../components/PastAuctions.astro';
 import LeadForm from '../../components/LeadForm.astro';
@@ -12,24 +12,15 @@ import { upcomingAuctions } from '../../data/auctions';
   imageAlt="Six past Associate Auctions sales: Fort Pierce development land, a Monterey Yacht Club condo, a construction company liquidation, a Port St. Lucie estate, St. Lucie West retail pads and lakefront homes"
   description="Upcoming and past auctions by Associate Auctions and KC Daniel: development land, commercial lots, homes, estates and vehicles on Florida's Treasure Coast."
 >
-  <section class="page-head">
-    <div class="container">
-      <div class="eyebrow">Auctions</div>
-      <h1>Upcoming &amp; past auctions</h1>
-      <p class="lead" style="max-width: 680px;">Every Associate Auctions sale is published here with its full terms and bidder documents.</p>
-    </div>
-  </section>
+  <BidderHero />
 
-  <section id="upcoming" class="section" style="padding-top: 0; padding-bottom: 56px;">
+  <section id="upcoming" class="section" style="padding-top: 56px; padding-bottom: 56px;">
     <div class="container">
       <h2 class="h2" style="font-size: 32px; margin-bottom: 20px;">Open for bidding</h2>
       {upcomingAuctions.length > 0 ? (
         <div class="grid-cards">{upcomingAuctions.map((a) => <AuctionCard auction={a} />)}</div>
       ) : (
-        <div class="panel" style="padding: 32px; display: flex; flex-direction: column; gap: 16px; max-width: 760px;">
-          <p class="lead" style="font-size: 17px;">No auctions are open for bidding right now. Get a text or email the day the next one is announced.</p>
-          <AlertsForm />
-        </div>
+<p class="lead" style="font-size: 17px; max-width: 680px;">No auctions are open for bidding right now. Sign up above and you’ll hear the day the next one is announced.</p>
       )}
     </div>
   </section>
