@@ -3,8 +3,8 @@ import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
 import AlertsForm from './AlertsForm.astro';
 import angle from '../assets/angle-road-aerial.jpg';
-import fruit from '../assets/fruit-exterior.jpg';
-import monterey from '../assets/monterey-condo.jpg';
+import slw from '../assets/st-lucie-west-aerial.jpg';
+import muzzin from '../assets/flyers/muzzin-brothers-construction-company-liquidation.jpg';
 import { pastAuctions, soldRegardless } from '../data/auctions';
 
 const perks = [
@@ -14,8 +14,8 @@ const perks = [
 ];
 const cards = [
   { src: angle, alt: '56.9 acres of development land in Fort Pierce, outlined on an aerial photo', label: '56.9 acres · Fort Pierce' },
-  { src: fruit, alt: 'Single-story estate home at 2392 SE Fruit Ave with palm trees', label: 'Estate home · Port St. Lucie' },
-  { src: monterey, alt: 'Riverside condo building at Monterey Yacht & Country Club', label: 'Riverside condo · Stuart' },
+  { src: slw, alt: 'Aerial of two pad-ready commercial lots in St. Lucie West beside a hotel', label: 'Retail pads · St. Lucie West' },
+  { src: muzzin, alt: 'Auction flyer for a construction company liquidation with heavy equipment and race cars', label: 'Equipment liquidation · Jensen Beach', top: true },
 ];
 ---
 <section class="bidder-hero dark">
@@ -38,7 +38,7 @@ const cards = [
     <div class="bh-stack" aria-label="Recent auctions">
       {cards.map((c, i) => (
         <figure class={`bh-card bh-card--${i + 1}`}>
-          <Image src={c.src} alt={c.alt} widths={[360, 560]} sizes="(max-width: 900px) 70vw, 360px" loading={i === 0 ? 'eager' : 'lazy'} />
+          <Image src={c.src} alt={c.alt} style={c.top ? 'object-position: top' : undefined} widths={[360, 560]} sizes="(max-width: 900px) 70vw, 360px" loading={i === 0 ? 'eager' : 'lazy'} />
           <figcaption>{c.label}</figcaption>
           <span class="bh-stamp" style={`animation-delay:${0.9 + i * 0.7}s`}>SOLD</span>
         </figure>
