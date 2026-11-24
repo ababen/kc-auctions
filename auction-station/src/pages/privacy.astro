@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+---
+<Layout title="Privacy Policy | Auction Station" description="How Auction Station collects, uses and protects the information you share through this website.">
+  <section class="section--tight dark"><div class="container stack"><p class="eyebrow">Legal</p><h1 class="h2">Privacy policy</h1><p class="lead">Last updated November 2026.</p></div></section>
+  <section class="section"><div class="container prose article">
+    <h2>What we collect</h2>
+    <p>Only what you send through our forms: your name, contact details, license numbers for listings, and details about your auction or request.</p>
+    <h2>How we use it</h2>
+    <p>To answer backup auctioneer requests, review and publish directory listings you ask us to publish, and contact you about your request. We don’t sell or rent your information.</p>
+    <h2>Service providers</h2>
+    <p>Form submissions reach us by email through FormSubmit (formsubmit.co). The site is hosted by Vercel, which also provides cookie-free visitor statistics (Vercel Web Analytics) that don’t identify you personally.</p>
+    <h2>Text messages</h2>
+    <p>If you give us a mobile number, we may text you about your request. Message and data rates may apply. Reply STOP to opt out. We don’t share mobile numbers or text consent with third parties for their marketing.</p>
+    <h2>Your choices</h2>
+    <p>To update or remove a directory listing, or to delete your information, email <a href={`mailto:${site.email}`}>{site.email}</a> or call <a href={site.phoneHref}>{site.phone}</a>.</p>
+  </div></section>
+</Layout>

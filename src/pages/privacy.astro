@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+---
+<Layout title="Privacy Policy | Associate Auctions" description="How Associate Auctions collects, uses and protects the information you share through this website.">
+  <section class="page-head">
+    <div class="container">
+      <div class="eyebrow">Legal</div>
+      <h1>Privacy policy</h1>
+      <p class="lead">Last updated November 2026.</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top: 0;">
+    <div class="container prose">
+      <h2>What we collect</h2>
+      <p>We collect only what you choose to send us through our forms: your name, email address, phone number, property details and message. We don’t ask for payment or financial information on this website.</p>
+      <h2>How we use it</h2>
+      <p>We use your information to answer your request, prepare an auction analysis, and, if you sign up, send auction alerts by email or text. We don’t sell or rent your information.</p>
+      <h2>Service providers</h2>
+      <p>Form submissions are delivered to us by email through FormSubmit (formsubmit.co). The site is hosted by Vercel, which also provides privacy-friendly visitor statistics (Vercel Web Analytics) that do not use cookies and do not identify you personally.</p>
+      <h2>Text messages</h2>
+      <p>If you give us a mobile number for auction alerts, we may send you texts about upcoming auctions. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. We don’t share mobile numbers or text consent with third parties for their marketing.</p>
+      <h2>Your choices</h2>
+      <p>To unsubscribe, correct or delete your information, email <a href={`mailto:${site.email}`}>{site.email}</a> or call <a href={site.phoneHref}>{site.phone}</a>.</p>
+      <h2>Links</h2>
+      <p>Pages we link to, such as maps or license lookups, have their own privacy practices.</p>
+      <h2>Contact</h2>
+      <p>{site.name}, {site.street}, {site.city}, {site.state} {site.zip}.</p>
+    </div>
+  </section>
+</Layout>

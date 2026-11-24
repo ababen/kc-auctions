@@ -90,7 +90,7 @@ const schemas = [business, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonL
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="topbar">
       <div class="container">
-        <span>FL Auctioneer {site.auctioneerLicense} · FL Broker {site.brokerLicense}</span>
+        <span>FL Auctioneer {site.auctioneerLicense} · FL Broker Associate {site.brokerLicense}</span>
         <span class="topbar-links">
           <a href={site.phoneHref}>{site.phone}</a>
           <a href={`mailto:${site.email}`}>{site.email}</a>
@@ -129,7 +129,7 @@ const schemas = [business, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonL
     <footer class="site-footer">
       <div class="container cols">
         <div style="flex: 1 1 300px;">
-          <Image src={seal} alt="Associate Auctions logo" width={181} height={181} style="width: 96px; height: 96px; margin-bottom: 14px;" />
+          <Image src={seal} alt="Associate Auctions logo" width={192} height={192} style="width: 96px; height: 96px; margin-bottom: 14px;" />
           <span style="display: block; font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--paper);">{site.name}</span>
           <address>
             {site.person}, {site.role}<br />
@@ -153,8 +153,18 @@ const schemas = [business, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonL
         </div>
       </div>
       <div class="container legal">
-        <span>© {new Date().getFullYear()} {site.name} · FL Auctioneer {site.auctioneerLicense} · FL Broker {site.brokerLicense}</span>
-        <span>{site.city}, Florida</span>
+        <div class="lic">
+          <div>© {new Date().getFullYear()} {site.name}. {site.person}, FL Licensed Auctioneer {site.auctioneerLicense}{site.auctionBusinessLicense && <> · Auction Business {site.auctionBusinessLicense}</>} · FL Real Estate Broker Associate {site.brokerLicense}{site.brokerage && <>, {site.brokerage}</>}.</div>
+          <div>Information deemed reliable but not guaranteed. Each auction is governed by its own written terms; announcements on auction day take precedence.</div>
+        </div>
+        <nav aria-label="Legal">
+          <a href="/disclosures/">Disclosures</a>
+          <a href="/privacy/">Privacy</a>
+          <span class="eho" title="Equal Housing Opportunity">
+            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11 12 3l9 8"/><path d="M5 9.5V21h14V9.5"/><path d="M9 13h6M9 16.5h6"/></svg>
+            Equal Housing Opportunity
+          </span>
+        </nav>
       </div>
     </footer>
 

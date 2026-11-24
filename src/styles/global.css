@@ -300,3 +300,13 @@ legend { font-size: 14px; font-weight: 600; margin-bottom: 10px; padding: 0; }
 .auction-card[hidden] { display: none; }
 .brand-seal { width: 56px; height: 56px; flex: none; }
 @media (max-width: 960px) { .brand-seal { width: 46px; height: 46px; } }
+.prose ul { list-style: disc; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; }
+.consent { font-size: 12.5px; line-height: 1.5; color: var(--muted); margin-top: 10px; }
+.consent a { text-decoration: underline; }
+.dark .consent, .lead-box .consent { color: var(--muted-on-dark); }
+.site-footer .legal { align-items: flex-start; }
+.site-footer .legal .lic { max-width: 760px; line-height: 1.6; }
+.site-footer .legal nav { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+.site-footer .legal nav a { text-decoration: underline; }
+.eho { display: inline-flex; align-items: center; gap: 8px; }
+.closed-note { font-size: 14px; color: var(--muted); border-left: 3px solid var(--gold); padding: 8px 14px; background: var(--paper-2); border-radius: 0 8px 8px 0; margin-bottom: 20px; }

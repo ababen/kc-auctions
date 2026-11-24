@@ -74,6 +74,7 @@ const jsonLd = {
           <a href="#location">Location</a>
         </nav>
 
+        {completed && <p class="closed-note">This auction has closed. Details below come from the original marketing materials and are shown for reference only.</p>}
         <section id="overview">
           <h2>Overview</h2>
           <p class="lead" style="font-size: 17px; line-height: 1.7;">{auction.overview}</p>
