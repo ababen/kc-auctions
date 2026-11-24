@@ -102,8 +102,8 @@ const org = {
           </div>
         </div>
         <div class="legal">
-          <span>© {new Date().getFullYear()} {site.name}. Operated by {site.operator}, {site.operatorTitle} {site.auctioneerLicense}.</span>
-          <span>Directory listings are provided by each auctioneer. Verify any Florida license at <a href={site.dbprSearch} style="display: inline; text-decoration: underline;" rel="noopener" target="_blank">myfloridalicense.com</a>.</span>
+          <span>© {new Date().getFullYear()} {site.name}. Operated by {site.operator}, {site.operatorTitle} {site.auctioneerLicense}{site.auctionBusinessLicense && <> · Auction Business {site.auctionBusinessLicense}</>}.</span>
+          <span>Directory listings are provided by each auctioneer. Verify any Florida license at <a href={site.dbprSearch} style="display: inline; text-decoration: underline;" rel="noopener" target="_blank">myfloridalicense.com</a>. <a href="/disclosures/" style="display: inline; text-decoration: underline;">Disclosures</a> · <a href="/privacy/" style="display: inline; text-decoration: underline;">Privacy</a></span>
         </div>
       </div>
     </footer>

@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+---
+<Layout title="Disclosures | Auction Station" description="Licensing, directory, backup auctioneer and website disclosures for Auction Station.">
+  <section class="section--tight dark"><div class="container stack"><p class="eyebrow">Legal</p><h1 class="h2">Disclosures</h1><p class="lead">Last updated November 2026.</p></div></section>
+  <section class="section"><div class="container prose article">
+    <h2>Who runs Auction Station</h2>
+    <p>Auction Station is operated by {site.operator}, Florida licensed auctioneer <strong>{site.auctioneerLicense}</strong>{site.auctionBusinessLicense && <>, auction business license <strong>{site.auctionBusinessLicense}</strong></>}, based in {site.city}, {site.state}. Licenses can be verified at <a href={site.dbprSearch} target="_blank" rel="noopener">myfloridalicense.com</a>.</p>
+    <h2>Auctioneer directory</h2>
+    <p>Directory listings are free and supplied by the auctioneers themselves. We check that each Florida license is active before a listing goes live, but we don’t endorse, employ or guarantee any listed auctioneer, and listings may change. Verify licenses, insurance and terms directly before you hire anyone.</p>
+    <h2>Backup auctioneer service</h2>
+    <p>Backup, standby and bid-calling work is performed only by licensed auctioneers, under a written agreement with the auction company or event organizer that names the auctioneer, license number and fee. Each auction remains subject to its own written terms.</p>
+    <h2>Guides</h2>
+    <p>Our guides are general information, not legal, tax or financial advice. Rules and practices vary by state and by auction; check the terms of any specific sale and consult your own advisers.</p>
+    <h2>Images</h2>
+    <p>Some images on this site, including the homepage auctioneer photo, are illustrations created for the site and do not show a real person or event.</p>
+    <h2>Contact consent</h2>
+    <p>When you submit a form, you agree that we may contact you by phone, text or email about your request. Message and data rates may apply. Reply STOP to any text to opt out. See our <a href="/privacy/">privacy policy</a>.</p>
+    <h2>Contact</h2>
+    <p><a href={site.phoneHref}>{site.phone}</a> · <a href={`mailto:${site.email}`}>{site.email}</a></p>
+  </div></section>
+</Layout>

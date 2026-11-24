@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+const updated = 'November 2026';
+---
+<Layout title="Licensing & Disclosures | Associate Auctions" description="Florida auctioneer and real estate licensing, brokerage relationship, auction terms, fair housing and website disclosures for Associate Auctions and KC Daniel.">
+  <section class="page-head">
+    <div class="container">
+      <div class="eyebrow">Legal</div>
+      <h1>Licensing &amp; disclosures</h1>
+      <p class="lead">Last updated {updated}.</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top: 0;">
+    <div class="container prose">
+      <h2 id="licensing">Licensing</h2>
+      <p><strong>{site.person}</strong> is a Florida licensed auctioneer, license <strong>{site.auctioneerLicense}</strong>, and a Florida licensed real estate broker associate, license <strong>{site.brokerLicense}</strong>.{site.brokerage && <> Real estate services are provided through <strong>{site.brokerage}</strong>, {site.street}, {site.city}, {site.state} {site.zip}.</>}</p>
+      {site.auctionBusinessLicense && <p>Auctions are conducted by {site.name}, Florida auction business license <strong>{site.auctionBusinessLicense}</strong>.</p>}
+      <p>Florida licenses are issued by the Department of Business and Professional Regulation. You can verify any license at <a href="https://www.myfloridalicense.com/wl11.asp" target="_blank" rel="noopener">myfloridalicense.com</a>.</p>
+
+      <h2 id="brokerage-relationship">Brokerage relationship</h2>
+      <p>Florida law presumes that real estate licensees operate as transaction brokers unless a single-agent or no-brokerage relationship is established in writing. In an auction, the auctioneer and broker act for the seller under a written auction agreement. Buyers should not assume that the auctioneer or broker represents their interests, and are encouraged to seek their own legal, tax and real estate advice.</p>
+
+      <h2 id="auction-terms">Auction terms</h2>
+      <ul>
+        <li>Every auction has its own written terms and conditions, published with the auction and in the bidder information package. Those terms control. Anything on this website is a summary.</li>
+        <li>Announcements made on auction day take precedence over printed or online material.</li>
+        <li>A buyer’s premium, when charged, is added to the high bid to determine the contract price. The rate is stated in each auction’s terms.</li>
+        <li>An <em>absolute</em> auction sells to the highest bidder regardless of price. A <em>reserve</em> auction is subject to the seller’s confirmation. Each auction states which applies.</li>
+        <li>Property is generally sold “as is, where is,” without warranties. Bidders are responsible for their own inspections and due diligence before bidding.</li>
+      </ul>
+
+      <h2 id="information">Accuracy of information</h2>
+      <p>Property details, measurements, zoning, photos and maps come from the seller, public records and other sources believed to be reliable, but they are not guaranteed and may change. Verify anything important to your decision independently.</p>
+      <p>Past auctions are shown for reference only. Their details come from the original marketing materials and describe the property at the time of sale. Past results do not predict the outcome of any future auction.</p>
+
+      <h2 id="fair-housing">Equal housing opportunity</h2>
+      <p>{site.name} supports the Fair Housing Act and equal housing opportunity. We do not discriminate on the basis of race, color, religion, sex, disability, familial status, national origin, or any other class protected by federal, state or local law.</p>
+
+      <h2 id="contact-consent">Contact consent</h2>
+      <p>When you submit a form on this site, you agree that {site.person} and {site.name} may contact you by phone, text message or email about your request and about upcoming auctions. Consent is not a condition of any purchase. Message and data rates may apply. Reply STOP to any text to opt out, or email <a href={`mailto:${site.email}`}>{site.email}</a>. See our <a href="/privacy/">privacy policy</a>.</p>
+
+      <h2 id="contact">Questions</h2>
+      <p>{site.person}, {site.street}, {site.city}, {site.state} {site.zip} · <a href={site.phoneHref}>{site.phone}</a> · <a href={`mailto:${site.email}`}>{site.email}</a></p>
+    </div>
+  </section>
+</Layout>
