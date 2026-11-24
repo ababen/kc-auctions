@@ -10,14 +10,20 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  imageAlt?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description, image, jsonLd } = Astro.props;
+const { title, description, image, imageAlt, jsonLd } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const path = Astro.url.pathname;
-const ogImage = new URL(image ?? '/og-image.jpg', Astro.site).toString();
-const ogAlt = image ? title : 'Associate Auctions: real estate auctions on the Treasure Coast with KC Daniel';
+// Share images must load from wherever the site is live. Until associateauctions.com points here,
+// Vercel's production URL is used; once the domain is added, Vercel reports it here instead.
+const liveHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+const imageBase = liveHost ? `https://${liveHost}` : Astro.site;
+const ogImage = new URL(image ?? '/og-image.jpg', imageBase).toString();
+const ogAlt = imageAlt ?? (image ? title : 'Associate Auctions: real estate auctions on the Treasure Coast with KC Daniel');
+const ogIsCard = !image || image.startsWith('/og-');
 
 const nav = [
   { href: '/auctions/', label: 'Auctions' },
@@ -67,7 +73,7 @@ const schemas = [business, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonL
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:alt" content={ogAlt} />
-    {!image && <><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" /></>}
+    {ogIsCard && <><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" /></>}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
