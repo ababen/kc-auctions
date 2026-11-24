@@ -1,0 +1,106 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import AlertsForm from './AlertsForm.astro';
+import angle from '../assets/angle-road-aerial.jpg';
+import fruit from '../assets/fruit-exterior.jpg';
+import monterey from '../assets/monterey-condo.jpg';
+import { pastAuctions, soldRegardless } from '../data/auctions';
+
+const perks = [
+  { title: 'No asking price', body: 'You decide what it’s worth. The bidding starts where the room starts.' },
+  { title: 'No haggling, no waiting', body: 'No counteroffers, no months on the market. It sells on auction day.' },
+  { title: 'Every bid in the open', body: 'You see exactly what you’re bidding against. Fair, fast and public.' },
+];
+const cards = [
+  { src: angle, alt: '56.9 acres of development land in Fort Pierce, outlined on an aerial photo', label: '56.9 acres · Fort Pierce' },
+  { src: fruit, alt: 'Single-story estate home at 2392 SE Fruit Ave with palm trees', label: 'Estate home · Port St. Lucie' },
+  { src: monterey, alt: 'Riverside condo building at Monterey Yacht & Country Club', label: 'Riverside condo · Stuart' },
+];
+---
+<section class="bidder-hero dark">
+  <div class="container bh-grid">
+    <div class="bh-copy">
+      <div class="eyebrow">For bidders</div>
+      <h1>Your next great deal is <em>one bid away.</em></h1>
+      <p class="bh-call" aria-hidden="true"><span>Going once…</span><span>Going twice…</span><span class="sold">SOLD!</span></p>
+      <p class="lead">At an auction there’s no sticker price. You set it with your paddle. Land, homes, trucks and treasures go to whoever wants them most on the day, and the bold bidder with a plan walks away with the deal.</p>
+      <ul class="bh-perks">
+        {perks.map((p) => <li><Icon name="check" size={18} stroke="#D9A441" /><span><b>{p.title}.</b> {p.body}</span></li>)}
+      </ul>
+      <div class="bh-alerts">
+        <p><b>Get first dibs.</b> Alert subscribers hear about the next auction the day it’s announced, before the signs go up.</p>
+        <AlertsForm />
+      </div>
+      <a class="bh-browse" href="#past">Browse {pastAuctions.length} past auctions <Icon name="arrow" size={16} /></a>
+    </div>
+
+    <div class="bh-stack" aria-label="Recent auctions">
+      {cards.map((c, i) => (
+        <figure class={`bh-card bh-card--${i + 1}`}>
+          <Image src={c.src} alt={c.alt} widths={[360, 560]} sizes="(max-width: 900px) 70vw, 360px" loading={i === 0 ? 'eager' : 'lazy'} />
+          <figcaption>{c.label}</figcaption>
+          <span class="bh-stamp" style={`animation-delay:${0.9 + i * 0.7}s`}>SOLD</span>
+        </figure>
+      ))}
+      <div class="bh-stat">
+        <strong>{soldRegardless}</strong>
+        <span>of our {pastAuctions.length} past auctions sold to the highest bidder regardless of price</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bidder-hero { position: relative; overflow: hidden; padding: 72px 0 88px; background:
+    radial-gradient(900px 500px at 85% 10%, rgba(217,164,65,.18), transparent 60%),
+    radial-gradient(700px 500px at 0% 100%, rgba(14,107,111,.25), transparent 60%), var(--ink); }
+  .bh-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+  .bh-copy { display: flex; flex-direction: column; gap: 20px; }
+  .bh-copy h1 { font-size: clamp(42px, 6vw, 76px); font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+  .bh-copy h1 em { font-style: normal; color: var(--gold); }
+  .bh-call { display: flex; flex-wrap: wrap; gap: 14px; font-family: var(--serif); font-size: clamp(20px, 2.4vw, 28px); font-weight: 700; color: var(--muted-on-dark); min-height: 1.3em; }
+  .bh-call span { opacity: 0; animation: call 6s infinite; }
+  .bh-call span:nth-child(2) { animation-delay: .9s; }
+  .bh-call .sold { color: var(--gold); animation-delay: 1.8s; animation-name: sold; }
+  @keyframes call { 0% { opacity: 0; transform: translateY(6px); } 8%, 80% { opacity: 1; transform: none; } 92%, 100% { opacity: 0; } }
+  @keyframes sold { 0% { opacity: 0; transform: scale(1.8) rotate(-8deg); } 6% { opacity: 1; transform: scale(1) rotate(-4deg); } 80% { opacity: 1; transform: rotate(-4deg); } 92%, 100% { opacity: 0; } }
+  .bh-perks { display: grid; gap: 10px; }
+  .bh-perks li { display: flex; gap: 10px; align-items: flex-start; color: #c9d3dd; font-size: 16px; line-height: 1.5; }
+  .bh-perks li :global(svg) { flex: none; margin-top: 3px; }
+  .bh-perks b { color: var(--paper); }
+  .bh-alerts { background: rgba(246,243,236,.06); border: 1px solid var(--ink-3); border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+  .bh-alerts p { color: #c9d3dd; font-size: 15px; }
+  .bh-alerts b { color: var(--gold); }
+  .bh-alerts :global(.field) { color: var(--paper); }
+  .bh-alerts :global(button) { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+  .bh-alerts :global(.consent) { color: var(--muted-on-dark); }
+  .bh-browse { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--gold); text-decoration: none; align-self: flex-start; }
+  .bh-stack { position: relative; height: 540px; align-self: start; margin-top: 40px; }
+  .bh-card { position: absolute; margin: 0; width: 66%; background: var(--paper); padding: 10px; border-radius: 8px; box-shadow: 0 24px 50px -20px rgba(0,0,0,.7); transition: transform .3s ease; }
+  .bh-card :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; }
+  .bh-card figcaption { position: absolute; left: 18px; top: 18px; background: var(--ink); color: var(--paper); font-weight: 700; font-size: 13px; padding: 5px 10px; border-radius: 999px; }
+  .bh-card--1 { top: 0; left: 0; transform: rotate(-6deg); z-index: 1; }
+  .bh-card--2 { top: 110px; right: 0; transform: rotate(5deg); z-index: 2; }
+  .bh-card--3 { top: 250px; left: 6%; transform: rotate(-2deg); z-index: 3; }
+  .bh-card:hover { transform: rotate(0) scale(1.03); z-index: 5; }
+  .bh-stamp { position: absolute; top: 46px; right: 18px; border: 4px solid var(--red); color: var(--red); background: rgba(246,243,236,.9); font-family: var(--sans); font-weight: 800; font-size: 26px; letter-spacing: .12em; padding: 2px 14px; border-radius: 6px; transform: rotate(-12deg); opacity: 0; animation: stamp .45s cubic-bezier(.2,1.6,.4,1) forwards; }
+  @keyframes stamp { from { opacity: 0; transform: rotate(-12deg) scale(2.4); } to { opacity: 1; transform: rotate(-12deg) scale(1); } }
+  .bh-stat { position: absolute; right: 0; bottom: 0; z-index: 4; width: 230px; background: var(--gold); color: var(--ink); border-radius: 14px; padding: 16px 18px; box-shadow: 0 18px 40px -18px rgba(0,0,0,.6); }
+  .bh-stat strong { display: block; font-family: var(--serif); font-size: 44px; line-height: 1; }
+  .bh-stat span { font-size: 13.5px; font-weight: 600; line-height: 1.35; }
+  @media (max-width: 900px) {
+    .bh-grid { grid-template-columns: 1fr; gap: 40px; }
+    .bh-stack { height: 440px; max-width: 520px; width: 100%; margin: 0 auto; }
+    .bidder-hero { padding: 40px 0 56px; }
+  }
+  @media (max-width: 520px) {
+    .bh-stack { height: 360px; }
+    .bh-card { width: 74%; }
+    .bh-card--2 { top: 90px; } .bh-card--3 { top: 190px; }
+    .bh-stat { width: 190px; } .bh-stat strong { font-size: 34px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bh-call span, .bh-stamp { animation: none; opacity: 1; }
+  }
+</style>

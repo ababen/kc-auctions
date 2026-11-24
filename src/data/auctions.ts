@@ -368,7 +368,38 @@ export const otherPastAuctions = [
 ] as const;
 
 export const upcomingAuctions = auctions.filter((a) => a.status === 'upcoming');
-export const pastAuctions = auctions.filter((a) => a.status === 'completed');
+/** Past auctions, biggest projects first. Unlisted slugs fall to the end in data order. */
+const pastOrder = [
+  'angle-road-development-property',
+  '5441-s-us-highway-1',
+  '6019-s-us-highway-1',
+  '1050-se-salerno-road',
+  'muzzin-brothers-construction-company-liquidation',
+  'city-of-stuart-surplus-vehicles-equipment',
+  'st-lucie-west-commercial-lots',
+  '2392-se-fruit-ave',
+  '37-nettles-blvd-nettles-island',
+  '3137-se-iris-street',
+  '384-ne-surfside-avenue',
+  '834-sw-general-patton-terrace',
+  '855-se-festivo-court',
+  'stuart-estate-auction-rv-harley-baby-grand',
+  'equipment-and-tool-auction-tractors-willys-ambulance',
+  'stuart-downtown-auction-government-surplus-vehicles',
+  'stuart-downtown-auction-hammock-creek-jupiter-palm-beach-estates',
+  'stuart-downtown-auction-baby-grand-motorcycle-canoe',
+  'stuart-downtown-auction-furniture-art-tools',
+  'real-estate-auction-2-1-riverside-condo-at-monterey-yacht-country-club',
+  'auction-2-homes-in-lakefront-private-community-in-port-st-lucie',
+  'auction-home-in-lakefront-private-community-in-port-st-lucie',
+];
+const rank = (slug: string) => { const i = pastOrder.indexOf(slug); return i === -1 ? pastOrder.length : i; };
+export const pastAuctions = auctions
+  .filter((a) => a.status === 'completed')
+  .sort((a, b) => rank(a.slug) - rank(b.slug));
+export const soldRegardless = pastAuctions.filter((a) =>
+  a.terms.some((t) => /regardless of price|absolute|no reserve/i.test(t)),
+).length;
 
 export const mapUrl = (address: string) =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
